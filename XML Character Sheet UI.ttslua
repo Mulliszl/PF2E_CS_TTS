@@ -1,0 +1,973 @@
+<Defaults>
+<!-- rgba(0,0,0,0)|rgba(0,0,0,0)|rgba(0,0,0,0)|rgba(0.78,0.78,0.78,0.5) -->
+<InputField class="textInput" placeholder=" " onValueChanged="updateState" onEndEdit="updateAutoBoxes" textAlignment="MiddleLeft" colors="rgba(0,0,0,0)|rgba(0,0,0,0)|rgba(0,0,0,0)|rgba(0.78,0.78,0.78,0.5)" textColor="#010101" />
+<InputField class="intInput" placeholder=" " onValueChanged="updateState" onEndEdit="updateAutoBoxes" textAlignment="MiddleCenter" characterValidation="Integer" colors="rgba(0,0,0,0)|rgba(0,0,0,0)|rgba(0,0,0,0)|rgba(0.78,0.78,0.78,0.5)" textColor="#010101" />
+<ToggleGroup class="toggleGroup" allowSwitchOff="true" />
+<Toggle class="toggleInput" onValueChanged="onToggleChanged" isOn="false" scale="1.5 1.5" colors="rgba(0,0,0,0)|rgba(0,0,0,0)|rgba(0,0,0,0)|rgba(0.78,0.78,0.78,0.5)" />
+<Text class="autoText" placeholder=" " textAlignment="MiddleCenter" color="#010101" />
+<Button class="autoButton" textAlignment="MiddleCenter" color="rgba(0,0,0,0)" onClick="autoRoll" />
+<ToggleButton class="sToggle" textAlignment="MiddleCenter" onValueChanged="toggleMode" colors="#FFFFFF|#FFFFFF|#C8C8C8|rgba(0.78,0.78,0.78,0.5)" />
+</Defaults>
+
+<Panel position="0 0 -5.01" rotation="0 0 180" scale="0.1 0.1">
+<!--Input Fields-->
+<ToggleButton class="sToggle" id="printToggle" position="156 230" width="115" height="76" fontSize="56" >ALL</ToggleButton>
+
+<!--Character Name-->
+<InputField class="textInput" id="characterName" position="-340 1890" width="1060" height="124" fontSize="96" />
+<!--Player Name-->
+<InputField class="textInput" id="playerName" position="-280 1740" width="932" height="92" fontSize="64" />
+<!--Experience Points-->
+<InputField class="intInput" id="experience" position="-240 1637" width="854" height="72" textAlignment="MiddleLeft" fontSize="48" />
+<!--Ancestry and Heritage-->
+<InputField class="textInput" id="ancestry" position="733 1981" width="1022" height="77" fontSize="56" />
+<!--Background-->
+<InputField class="textInput" id="background" position="733 1877" width="1022" height="77" fontSize="56" />
+<!--Class-->
+<InputField class="textInput" id="class" position="733 1775" width="1022" height="80" fontSize="56" />
+<!--Size-->
+<InputField class="textInput" id="size" position="304 1686" width="180" height="42" fontSize="24" />
+<!--Alignment-->
+<InputField class="textInput" id="alignment" position="531 1686" width="265" height="42" fontSize="24" />
+<!--Traits-->
+<InputField class="textInput" id="traits" position="956 1686" width="590" height="42" fontSize="24" />
+<!--Deity-->
+<InputField class="textInput" id="deity" position="733 1615" width="1022" height="50" fontSize="32" />
+<!--Level-->
+<InputField class="intInput" id="level" position="1407 1892" width="244" height="124" fontSize="96" />
+<!--Hero Points-->
+<InputField class="intInput" id="heroPoints" position="1407 1680" width="159" height="130" fontSize="96" />
+
+<!--Strength Score-->
+<InputField text="10" class="intInput" id="abilityScores_strength_score" position="-667 1420" width="141" height="90" fontSize="64" />
+<!--Dexterity Score-->
+<InputField text="10" class="intInput" id="abilityScores_dexterity_score" position="-667 1267" width="141" height="90" fontSize="64" />
+<!--Constitution Score-->
+<InputField text="10" class="intInput" id="abilityScores_constitution_score" position="-667 1115" width="141" height="90" fontSize="64" />
+<!--Intelligence Score-->
+<InputField text="10" class="intInput" id="abilityScores_intelligence_score" position="-667 965" width="141" height="90" fontSize="64" />
+<!--Wisdom Score-->
+<InputField text="10" class="intInput" id="abilityScores_wisdom_score" position="-667 814" width="141" height="90" fontSize="64" />
+<!--Charisma Score-->
+<InputField text="10" class="intInput" id="abilityScores_charisma_score" position="-667 662" width="141" height="90" fontSize="64" />
+
+<!--Class DC Key Modifier-->
+<InputField class="intInput" id="classDC_keyBonus" position="-1115 429" width="105" height="78" fontSize="56" />
+<!--Class DC Item Bonus-->
+<InputField class="intInput" id="classDC_itemBonus" position="-649 429" width="105" height="78" fontSize="56" />
+
+<!--AC Cap-->
+<InputField class="intInput" id="armor_cap" position="223 1395" width="107" height="82" fontSize="56" />
+<!--AC Item Bonus-->
+<InputField class="intInput" id="armor_itemBonus" position="686 1398" width="115" height="82" fontSize="56" />
+
+<!--Shield AC Bonus-->
+<InputField class="intInput" id="shield_acBonus" position="92 1136" width="100" height="74" fontSize="48" />
+<!--Shield Hardness-->
+<InputField class="intInput" id="shield_hardness" position="262 1118" width="155" height="68" fontSize="48" />
+<!--Shield Max HP-->
+<InputField class="intInput" id="shield_maxHP" position="445 1118" width="111" height="68" fontSize="48" />
+<!--Shield BT-->
+<InputField class="intInput" id="shield_brokenThreshold" position="547 1118" width="80" height="68" fontSize="48" />
+<!--Shield Current HP-->
+<InputField class="intInput" id="shield_currentHP" position="706 1118" width="168" height="68" fontSize="48" />
+
+<!--Fortitude Item Bonus-->
+<InputField class="intInput" id="savingThrows_fortitude_itemBonus" position="-367 568" width="108" height="77" fontSize="56" />
+<!--Reflex Item Bonus-->
+<InputField class="intInput" id="savingThrows_reflex_itemBonus" position="73 568" width="108" height="77" fontSize="56" />
+<!--Will Item Bonus-->
+<InputField class="intInput" id="savingThrows_will_itemBonus" position="506 568" width="108" height="77" fontSize="56" />
+<!--Saving Throw Notes-->
+<InputField class="textInput" id="savingThrows_notes" position="151 441" width="1183" height="84" fontSize="48" />
+
+<!--Hit Points Max-->
+<InputField class="intInput" id="hitPoints_max" position="959 1481" width="160" height="99" fontSize="72" characterLimit="3" />
+<!--Hit Points Current-->
+<InputField class="intInput" id="hitPoints_current" position="1053 1289" width="288" height="222" fontSize="96" characterLimit="5" />
+<!--Hit Points Temporary-->
+<InputField class="intInput" id="hitPoints_temporary" position="1377 1376" width="283" height="90" fontSize="64" characterLimit="7" />
+<!--Dying-->
+<InputField class="intInput" id="hitPoints_dying" position="1288 1230" width="108" height="78" fontSize="56" characterLimit="1" />
+<!--Wounded-->
+<InputField class="intInput" id="hitPoints_wounded" position="1446 1230" width="147" height="78" fontSize="56" characterLimit="1" />
+<!--Resistances and Immunities-->
+<InputField class="textInput" id="hitPoints_resistances" position="1203 1069" width="617" height="115" textAlignment="topLeft" fontSize="36" lineType="MultiLineNewLine" />
+<!--Conditions-->
+<InputField class="textInput" id="hitPoints_conditions" position="1203 885" width="617" height="124" textAlignment="topLeft" fontSize="36" lineType="MultiLineNewLine" />
+
+<!--Perception Item Bonus-->
+<InputField class="intInput" id="perception_itemBonus" position="1478 605" width="85" height="78" fontSize="56" />
+<!--Senses-->
+<InputField class="textInput" id="perception_senses" position="1234 446" width="585" height="113" fontSize="36" textAlignment="topLeft" lineType="MultiLineNewLine" />
+
+<!--Movement Speed-->
+<InputField class="intInput" id="movement_speed" position="-1116 301" width="228" height="89" fontSize="64" characterLimit="5" />
+<!--Movement Types and Notes-->
+<InputField class="textInput" id="movement_notes" position="-375 273" width="843" height="113" fontSize="36" textAlignment="topLeft" lineType="MultiLineNewLine" />
+
+<!--Melee Weapon 1 Name-->
+<InputField class="textInput" id="strikes_melee1_name" position="-1186 55" width="663" height="74" fontSize="48" />
+<!--Melee Weapon 1 Hit Modifier-->
+<InputField class="intInput" id="strikes_melee1_hitModifier" position="-488 44" width="114" height="85" fontSize="64" />
+<!--Melee Weapon 1 Hit Item Bonus-->
+<InputField class="intInput" id="strikes_melee1_itemBonus" position="-22 44" width="111" height="85" fontSize="64" />
+<!--Melee Weapon 1 Damage Dice-->
+<InputField class="textInput" id="strikes_melee1_damageDice" position="-1466 -118" width="137" height="68" textAlignment="middleCenter" fontSize="48" />
+<!--Melee Weapon 1 Damage Modifier-->
+<InputField class="intInput" id="strikes_melee1_damageModifier" position="-1301 -118" width="115" height="68" fontSize="48" />
+<!--Melee Weapon 1 Weapon Specialization-->
+<InputField class="intInput" id="strikes_melee1_weaponSpecialization" position="-1029 -118" width="117" height="68" fontSize="48" />
+<!--Melee Weapon 1 Other-->
+<InputField class="textInput" id="strikes_melee1_other" position="-757 -118" width="370" height="68" fontSize="48" />
+<!--Melee Weapon 1 Traits-->
+<InputField class="textInput" id="strikes_melee1_traits" position="-257 -118" width="602" height="68" fontSize="48" />
+
+<!--Melee Weapon 2 Name-->
+<InputField class="textInput" id="strikes_melee2_name" position="-1186 -260" width="663" height="74" fontSize="48" />
+<!--Melee Weapon 2 Hit Modifier-->
+<InputField class="intInput" id="strikes_melee2_hitModifier" position="-488 -271" width="114" height="85" fontSize="64" />
+<!--Melee Weapon 2 Hit Item Bonus-->
+<InputField class="intInput" id="strikes_melee2_itemBonus" position="-22 -271" width="111" height="85" fontSize="64" />
+<!--Melee Weapon 2 Damage Dice-->
+<InputField class="textInput" id="strikes_melee2_damageDice" position="-1466 -435" width="137" height="68" textAlignment="middleCenter" fontSize="48" />
+<!--Melee Weapon 2 Damage Modifier-->
+<InputField class="intInput" id="strikes_melee2_damageModifier" position="-1301 -435" width="115" height="68" fontSize="48" />
+<!--Melee Weapon 2 Weapon Specialization-->
+<InputField class="intInput" id="strikes_melee2_weaponSpecialization" position="-1024 -435" width="117" height="68" fontSize="48" />
+<!--Melee Weapon 2 Other-->
+<InputField class="textInput" id="strikes_melee2_other" position="-757 -435" width="354" height="68" fontSize="48" />
+<!--Melee Weapon 2 Traits-->
+<InputField class="textInput" id="strikes_melee2_traits" position="-257 -435" width="583" height="68" fontSize="48" />
+
+<!--Melee Weapon 3 Name-->
+<InputField class="textInput" id="strikes_melee3_name" position="-1186 -575" width="663" height="74" fontSize="48" />
+<!--Melee Weapon 3 Hit Modifier-->
+<InputField class="intInput" id="strikes_melee3_hitModifier" position="-488 -589" width="114" height="85" fontSize="64" />
+<!--Melee Weapon 3 Hit Item Bonus-->
+<InputField class="intInput" id="strikes_melee3_itemBonus" position="-22 -589" width="111" height="85" fontSize="64" />
+<!--Melee Weapon 3 Damage Dice-->
+<InputField class="textInput" id="strikes_melee3_damageDice" position="-1466 -751" width="137" height="68" textAlignment="middleCenter" fontSize="48" />
+<!--Melee Weapon 3 Damage Modifier-->
+<InputField class="intInput" id="strikes_melee3_damageModifier" position="-1301 -751" width="115" height="68" fontSize="48" />
+<!--Melee Weapon 3 Weapon Specialization-->
+<InputField class="intInput" id="strikes_melee3_weaponSpecialization" position="-1024 -751" width="117" height="68" fontSize="48" />
+<!--Melee Weapon 3 Other-->
+<InputField class="textInput" id="strikes_melee3_other" position="-757 -751" width="354" height="68" fontSize="48" />
+<!--Melee Weapon 3 Traits-->
+<InputField class="textInput" id="strikes_melee3_traits" position="-257 -751" width="583" height="68" fontSize="48" />
+
+<!--Ranged Weapon 1 Name-->
+<InputField class="textInput" id="strikes_ranged1_name" position="-1186 -975" width="663" height="74" fontSize="48" />
+<!--Ranged Weapon 1 Hit Modifier-->
+<InputField class="intInput" id="strikes_ranged1_hitModifier" position="-488 -990" width="114" height="85" fontSize="64" />
+<!--Ranged Weapon 1 Hit Item Bonus-->
+<InputField class="intInput" id="strikes_ranged1_itemBonus" position="-22 -990" width="111" height="85" fontSize="64" />
+<!--Ranged Weapon 1 Damage Dice-->
+<InputField class="textInput" id="strikes_ranged1_damageDice" position="-1466 -1153" width="137" height="68" textAlignment="middleCenter" fontSize="48" />
+<!--Ranged Weapon 1 Damage Modifier-->
+<InputField class="intInput" id="strikes_ranged1_damageModifier" position="-1301 -1153" width="115" height="68" fontSize="48" />
+<!--Ranged Weapon 1 Weapon Specialization-->
+<InputField class="intInput" id="strikes_ranged1_weaponSpecialization" position="-1024 -1153" width="117" height="68" fontSize="48" />
+<!--Ranged Weapon 1 Other-->
+<InputField class="textInput" id="strikes_ranged1_other" position="-757 -1153" width="354" height="68" fontSize="48" />
+<!--Ranged Weapon 1 Traits-->
+<InputField class="textInput" id="strikes_ranged1_traits" position="-257 -1153" width="583" height="68" fontSize="48" />
+
+<!--Ranged Weapon 2 Name-->
+<InputField class="textInput" id="strikes_ranged2_name" position="-1186 -1286" width="663" height="74" fontSize="48" />
+<!--Ranged Weapon 2 Hit Modifier-->
+<InputField class="intInput" id="strikes_ranged2_hitModifier" position="-488 -1301" width="114" height="85" fontSize="64" />
+<!--Ranged Weapon 2 Hit Item Bonus-->
+<InputField class="intInput" id="strikes_ranged2_itemBonus" position="-22 -1301" width="111" height="85" fontSize="64" />
+<!--Ranged Weapon 2 Damage Dice-->
+<InputField class="textInput" id="strikes_ranged2_damageDice" position="-1466 -1464" width="137" height="68" textAlignment="middleCenter" fontSize="48" />
+<!--Ranged Weapon 2 Damage Modifier-->
+<InputField class="intInput" id="strikes_ranged2_damageModifier" position="-1301 -1464" width="115" height="68" fontSize="48" />
+<!--Ranged Weapon 2 Weapon Specialization-->
+<InputField class="intInput" id="strikes_ranged2_weaponSpecialization" position="-1024 -1464" width="117" height="68" fontSize="48" />
+<!--Ranged Weapon 2 Other-->
+<InputField class="textInput" id="strikes_ranged2_other" position="-757 -1464" width="354" height="68" fontSize="48" />
+<!--Ranged Weapon 2 Traits-->
+<InputField class="textInput" id="strikes_ranged2_traits" position="-257 -1464" width="583" height="68" fontSize="48" />
+
+<!--Ranged Weapon 3 Name-->
+<InputField class="textInput" id="strikes_ranged3_name" position="-1186 -1593" width="663" height="74" fontSize="48" />
+<!--Ranged Weapon 3 Hit Modifier-->
+<InputField class="intInput" id="strikes_ranged3_hitModifier" position="-488 -1609" width="114" height="85" fontSize="64" />
+<!--Ranged Weapon 3 Hit Item Bonus-->
+<InputField class="intInput" id="strikes_ranged3_itemBonus" position="-22 -1609" width="111" height="85" fontSize="64" />
+<!--Ranged Weapon 3 Damage Dice-->
+<InputField class="textInput" id="strikes_ranged3_damageDice" position="-1466 -1774" width="137" height="68" textAlignment="middleCenter" fontSize="48" />
+<!--Ranged Weapon 3 Damage Modifier-->
+<InputField class="intInput" id="strikes_ranged3_damageModifier" position="-1301 -1774" width="115" height="68" fontSize="48" />
+<!--Ranged Weapon 3 Weapon Specialization-->
+<InputField class="intInput" id="strikes_ranged3_weaponSpecialization" position="-1024 -1774" width="117" height="68" fontSize="48" />
+<!--Ranged Weapon 3 Other-->
+<InputField class="textInput" id="strikes_ranged3_other" position="-757 -1774" width="354" height="68" fontSize="48" />
+<!--Ranged Weapon 3 Traits-->
+<InputField class="textInput" id="strikes_ranged3_traits" position="-257 -1774" width="583" height="68" fontSize="48" />
+
+<!--Other Weapon Proficiency Name 1-->
+<InputField class="textInput" id="weaponProficiencies_other1_name" position="-729 -1982" width="355" height="80" fontSize="48" />
+<!--Other Weapon Proficiency Name 2-->
+<InputField class="textInput" id="weaponProficiencies_other2_name" position="-135 -1982" width="355" height="80" fontSize="48" />
+
+<!--Acrobatics Item Bonus-->
+<InputField class="intInput" id="skills_acrobatics_itemBonus" position="1316 208" width="115" height="76" fontSize="56" />
+<!--Acrobatics Armor Penalty-->
+<InputField class="intInput" id="skills_acrobatics_armorPenalty" position="1470 208" width="95" height="76" fontSize="56" />
+<!--Arcana Item Bonus-->
+<InputField class="intInput" id="skills_arcana_itemBonus" position="1316 87" width="115" height="76" fontSize="56" />
+<!--Athletics Item Bonus-->
+<InputField class="intInput" id="skills_athletics_itemBonus" position="1316 -32" width="115" height="76" fontSize="56" />
+<!--Athletics Armor Penalty-->
+<InputField class="intInput" id="skills_athletics_armorPenalty" position="1470 -32" width="95" height="76" fontSize="56" />
+<!--Crafting Item Bonus-->
+<InputField class="intInput" id="skills_crafting_itemBonus" position="1316 -152" width="115" height="76" fontSize="56" />
+<!--Deception Item Bonus-->
+<InputField class="intInput" id="skills_deception_itemBonus" position="1316 -270" width="115" height="76" fontSize="56" />
+<!--Diplomacy Item Bonus-->
+<InputField class="intInput" id="skills_diplomacy_itemBonus" position="1316 -390" width="115" height="76" fontSize="56" />
+<!--Intimidation Item Bonus-->
+<InputField class="intInput" id="skills_intimidation_itemBonus" position="1316 -510" width="115" height="76" fontSize="56" />
+<!--Lore 1 Type-->
+<InputField class="textInput" id="skills_lore1_type" position="254 -610" width="304" height="70" textAlignment="middleRight" fontSize="48" />
+<!--Lore 1 Item Bonus-->
+<InputField class="intInput" id="skills_lore1_itemBonus" position="1316 -629" width="115" height="76" fontSize="56" />
+<!--Lore 2 Type-->
+<InputField class="textInput" id="skills_lore2_type" position="253 -734" width="304" height="70" textAlignment="middleRight" fontSize="48" />
+<!--Lore 2 Item Bonus-->
+<InputField class="intInput" id="skills_lore2_itemBonus" position="1316 -749" width="115" height="76" fontSize="56" />
+<!--Medicine Item Bonus-->
+<InputField class="intInput" id="skills_medicine_itemBonus" position="1316 -869" width="115" height="76" fontSize="56" />
+<!--Nature Item Bonus-->
+<InputField class="intInput" id="skills_nature_itemBonus" position="1316 -988" width="115" height="76" fontSize="56" />
+<!--Occultism Item Bonus-->
+<InputField class="intInput" id="skills_occultism_itemBonus" position="1316 -1108" width="115" height="76" fontSize="56" />
+<!--Performance Item Bonus-->
+<InputField class="intInput" id="skills_performance_itemBonus" position="1316 -1228" width="115" height="76" fontSize="56" />
+<!--Religion Item Bonus-->
+<InputField class="intInput" id="skills_religion_itemBonus" position="1316 -1347" width="115" height="76" fontSize="56" />
+<!--Society Item Bonus-->
+<InputField class="intInput" id="skills_society_itemBonus" position="1316 -1467" width="115" height="76" fontSize="56" />
+<!--Stealth Item Bonus-->
+<InputField class="intInput" id="skills_stealth_itemBonus" position="1316 -1585" width="115" height="76" fontSize="56" />
+<!--Stealth Armor Penalty-->
+<InputField class="intInput" id="skills_stealth_armorPenalty" position="1470 -1585" width="95" height="76" fontSize="56" />
+<!--Survival Item Bonus-->
+<InputField class="intInput" id="skills_survival_itembonus" position="1316 -1705" width="115" height="76" fontSize="56" />
+<!--Thievery Item Bonus-->
+<InputField class="intInput" id="skills_thievery_itemBonus" position="1316 -1825" width="115" height="76" fontSize="56" />
+<!--Thievery Armor Penalty-->
+<InputField class="intInput" id="skills_thievery_armorPenalty" position="1470 -1825" width="95" height="76" fontSize="56" />
+
+<!--Languages-->
+<InputField text="Common" class="textInput" id="languages" position="819 -1992" width="1454" height="67" fontSize="48" />
+
+<!--Check-boxes-->
+
+<!--Class Proficiency-->
+<ToggleGroup class="toggleGroup" id="classDC_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="classDC_proficiency_0" position="-877 426" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="classDC_proficiency_1" position="-833 426" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="classDC_proficiency_2" position="-789 426" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="classDC_proficiency_3" position="-745 426" width="35" height="56" />
+</ToggleGroup>
+
+<!--Current Armor Proficiency-->
+<ToggleGroup class="toggleGroup" id="armor_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="armor_proficiency_0" position="458 1392" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="armor_proficiency_1" position="501 1392" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="armor_proficiency_2" position="545 1392" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="armor_proficiency_3" position="589 1392" width="35" height="56" />
+</ToggleGroup>
+
+<!--Unarmored Proficiency-->
+<ToggleGroup class="toggleGroup" id="armor_unarmoredProficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="armor_unarmoredProficiency_0" position="-44 1252" width="35" height="33" />
+<!--Expert-->
+<Toggle class="toggleInput" id="armor_unarmoredProficiency_1" position="-1 1252" width="35" height="33" />
+<!--Master-->
+<Toggle class="toggleInput" id="armor_unarmoredProficiency_2" position="43 1252" width="35" height="33" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="armor_unarmoredProficiency_3" position="86 1252" width="35" height="33" />
+</ToggleGroup>
+
+<!--Light Armor Proficiency-->
+<ToggleGroup class="toggleGroup" id="armor_lightProficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="armor_lightProficiency_0" position="160 1252" width="35" height="33" />
+<!--Expert-->
+<Toggle class="toggleInput" id="armor_lightProficiency_1" position="202 1252" width="35" height="33" />
+<!--Master-->
+<Toggle class="toggleInput" id="armor_lightProficiency_2" position="246 1252" width="35" height="33" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="armor_lightProficiency_3" position="289 1252" width="35" height="33" />
+</ToggleGroup>
+
+<!--Medium Armor Proficiency-->
+<ToggleGroup class="toggleGroup" id="armor_mediumProficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="armor_mediumProficiency_0" position="362 1252" width="35" height="33" />
+<!--Expert-->
+<Toggle class="toggleInput" id="armor_mediumProficiency_1" position="405 1252" width="35" height="33" />
+<!--Master-->
+<Toggle class="toggleInput" id="armor_mediumProficiency_2" position="449 1252" width="35" height="33" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="armor_mediumProficiency_3" position="492 1252" width="35" height="33" />
+</ToggleGroup>
+
+<!--Heavy Armor Proficiency-->
+<ToggleGroup class="toggleGroup" id="armor_heavyProficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="armor_heavyProficiency_0" position="564 1250" width="35" height="33" />
+<!--Expert-->
+<Toggle class="toggleInput" id="armor_heavyProficiency_1" position="608 1250" width="35" height="33" />
+<!--Master-->
+<Toggle class="toggleInput" id="armor_heavyProficiency_2" position="652 1250" width="35" height="33" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="armor_heavyProficiency_3" position="695 1250" width="35" height="33" />
+</ToggleGroup>
+
+<!--Fortitude Proficiency-->
+<ToggleGroup class="toggleGroup" id="savingThrows_fortitude_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="savingThrows_fortitude_proficiency_0" position="-255 563" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="savingThrows_fortitude_proficiency_1" position="-211 563" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="savingThrows_fortitude_proficiency_2" position="-167 563" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="savingThrows_fortitude_proficiency_3" position="-124 563" width="35" height="56" />
+</ToggleGroup>
+
+<!--Reflex Proficiency-->
+<ToggleGroup class="toggleGroup" id="savingThrows_reflex_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="savingThrows_reflex_proficiency_0" position="182 563" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="savingThrows_reflex_proficiency_1" position="226 563" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="savingThrows_reflex_proficiency_2" position="269 563" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="savingThrows_reflex_proficiency_3" position="313 563" width="35" height="56" />
+</ToggleGroup>
+
+<!--Will Proficiency-->
+<ToggleGroup class="toggleGroup" id="savingThrows_will_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="savingThrows_will_proficiency_0" position="614 563" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="savingThrows_will_proficiency_1" position="657 563" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="savingThrows_will_proficiency_2" position="701 563" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="savingThrows_will_proficiency_3" position="744 563" width="35" height="56" />
+</ToggleGroup>
+
+<!--Perception Proficiency-->
+<ToggleGroup class="toggleGroup" id="perception_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="perception_proficiency_0" position="1261 609" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="perception_proficiency_1" position="1304 609" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="perception_proficiency_2" position="1348 609" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="perception_proficiency_3" position="1392 609" width="35" height="56" />
+</ToggleGroup>
+
+<!--Melee Weapon 1 Proficiency-->
+<ToggleGroup class="toggleGroup" id="strikes_melee1_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="strikes_melee1_proficiency_0" position="-252 41" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="strikes_melee1_proficiency_1" position="-208 41" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="strikes_melee1_proficiency_2" position="-164 41" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="strikes_melee1_proficiency_3" position="-121 41" width="35" height="56" />
+</ToggleGroup>
+
+<!--Melee Weapon 1 Damage Type-->
+<ToggleGroup class="toggleGroup" id="strikes_melee1_damageType">
+<!--Bludgeoning-->
+<Toggle class="toggleInput" id="strikes_melee1_damageType_0" position="-1187 -62" width="29" height="26" />
+<!--Piercing-->
+<Toggle class="toggleInput" id="strikes_melee1_damageType_1" position="-1187 -103" width="29" height="26" />
+<!--Slashing-->
+<Toggle class="toggleInput" id="strikes_melee1_damageType_2" position="-1187 -145" width="29" height="26" />
+</ToggleGroup>
+
+<!--Melee Weapon 2 Proficiency-->
+<ToggleGroup class="toggleGroup" id="strikes_melee2_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="strikes_melee2_proficiency_0" position="-252 -274" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="strikes_melee2_proficiency_1" position="-209 -274" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="strikes_melee2_proficiency_2" position="-164 -274" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="strikes_melee2_proficiency_3" position="-121 -274" width="35" height="56" />
+</ToggleGroup>
+
+<!--Melee Weapon 2 Damage Type-->
+<ToggleGroup class="toggleGroup" id="strikes_melee2_damageType" >
+<!--Bludgeoning-->
+<Toggle class="toggleInput" id="strikes_melee2_damageType_0" position="-1187 -377" width="29" height="26" />
+<!--Piercing-->
+<Toggle class="toggleInput" id="strikes_melee2_damageType_1" position="-1187 -418" width="29" height="26" />
+<!--Slashing-->
+<Toggle class="toggleInput" id="strikes_melee2_damageType_2" position="-1187 -460" width="29" height="26" />
+</ToggleGroup>
+
+<!--Melee Weapon 3 Proficiency-->
+<ToggleGroup class="toggleGroup" id="strikes_melee3_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="strikes_melee3_proficiency_0" position="-252 -593" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="strikes_melee3_proficiency_1" position="-208 -593" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="strikes_melee3_proficiency_2" position="-164 -593" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="strikes_melee3_proficiency_3" position="-121 -593" width="35" height="56" />
+</ToggleGroup>
+
+<!--Melee Weapon 3 Damage Type-->
+<ToggleGroup class="toggleGroup" id="strikes_melee3_damageType">
+<!--Bludgeoning-->
+<Toggle class="toggleInput" id="strikes_melee3_damageType_0" position="-1187 -695" width="29" height="26" />
+<!--Piercing-->
+<Toggle class="toggleInput" id="strikes_melee3_damageType_1" position="-1187 -737" width="29" height="26" />
+<!--Slashing-->
+<Toggle class="toggleInput" id="strikes_melee3_damageType_2" position="-1187 -778" width="29" height="26" />
+</ToggleGroup>
+
+<!--Ranged Weapon 1 Proficiency-->
+<ToggleGroup class="toggleGroup" id="strikes_ranged1_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="strikes_ranged1_proficiency_0" position="-252 -993" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="strikes_ranged1_proficiency_1" position="-208 -993" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="strikes_ranged1_proficiency_2" position="-164 -993" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="strikes_ranged1_proficiency_3" position="-121 -993" width="35" height="56" />
+</ToggleGroup>
+
+<!--Ranged Weapon 1 Damage Type-->
+<ToggleGroup class="toggleGroup" id="strikes_ranged1_damageType">
+<!--Bludgeoning-->
+<Toggle class="toggleInput" id="strikes_ranged1_damageType_0" position="-1186 -1097" width="29" height="26" />
+<!--Piercing-->
+<Toggle class="toggleInput" id="strikes_ranged1_damageType_1" position="-1186 -1139" width="29" height="26" />
+<!--Slashing-->
+<Toggle class="toggleInput" id="strikes_ranged1_damageType_2" position="-1186 -1181" width="29" height="26" />
+</ToggleGroup>
+
+<!--Ranged Weapon 2 Proficiency-->
+<ToggleGroup class="toggleGroup" id="strikes_ranged2_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="strikes_ranged2_proficiency_0" position="-252 -1304" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="strikes_ranged2_proficiency_1" position="-208 -1304" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="strikes_ranged2_proficiency_2" position="-164 -1304" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="strikes_ranged2_proficiency_3" position="-121 -1304" width="35" height="56" />
+</ToggleGroup>
+
+<!--Ranged Weapon 2 Damage Type-->
+<ToggleGroup class="toggleGroup" id="strikes_ranged2_damageType">
+<!--Bludgeoning-->
+<Toggle class="toggleInput" id="strikes_ranged2_damageType_0" position="-1186 -1407" width="29" height="26" />
+<!--Piercing-->
+<Toggle class="toggleInput" id="strikes_ranged2_damageType_1" position="-1186 -1449" width="29" height="26" />
+<!--Slashing-->
+<Toggle class="toggleInput" id="strikes_ranged2_damageType_2" position="-1186 -1490" width="29" height="26" />
+</ToggleGroup>
+
+<!--Ranged Weapon 3 Proficiency-->
+<ToggleGroup class="toggleGroup" id="strikes_ranged3_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="strikes_ranged3_proficiency_0" position="-252 -1613" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="strikes_ranged3_proficiency_1" position="-208 -1613" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="strikes_ranged3_proficiency_2" position="-164 -1613" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="strikes_ranged3_proficiency_3" position="-121 -1613" width="35" height="56" />
+</ToggleGroup>
+
+<!--Ranged Weapon 3 Damage Type-->
+<ToggleGroup class="toggleGroup" id="strikes_ranged3_damageType">
+<!--Bludgeoning-->
+<Toggle class="toggleInput" id="strikes_ranged3_damageType_0" position="-1186 -1717" width="29" height="26" />
+<!--Piercing-->
+<Toggle class="toggleInput" id="strikes_ranged3_damageType_1" position="-1186 -1759" width="29" height="26" />
+<!--Slashing-->
+<Toggle class="toggleInput" id="strikes_ranged3_damageType_2" position="-1186 -1800" width="29" height="26" />
+</ToggleGroup>
+
+<!--Simple Weapons Proficiency-->
+<ToggleGroup class="toggleGroup" id="weaponProficiencies_simple">
+<!--Trained-->
+<Toggle class="toggleInput" id="weaponProficiencies_simple_0" position="-1513 -2013" width="35" height="33" />
+<!--Expert-->
+<Toggle class="toggleInput" id="weaponProficiencies_simple_1" position="-1470 -2013" width="35" height="33" />
+<!--Master-->
+<Toggle class="toggleInput" id="weaponProficiencies_simple_2" position="-1426 -2013" width="35" height="33" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="weaponProficiencies_simple_3" position="-1383 -2013" width="35" height="33" />
+</ToggleGroup>
+
+<!--Martial Weapons Proficiency-->
+<ToggleGroup class="toggleGroup" id="weaponProficiencies_martial">
+<!--Trained-->
+<Toggle class="toggleInput" id="weaponProficiencies_martial_0" position="-1304 -2013" width="35" height="33" />
+<!--Expert-->
+<Toggle class="toggleInput" id="weaponProficiencies_martial_1" position="-1261 -2013" width="35" height="33" />
+<!--Master-->
+<Toggle class="toggleInput" id="weaponProficiencies_martial_2" position="-1216 -2013" width="35" height="33" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="weaponProficiencies_martial_3" position="-1173 -2013" width="35" height="33" />
+</ToggleGroup>
+
+<!--Other Weapon Proficiency 1-->
+<ToggleGroup class="toggleGroup" id="weaponProficiencies_other1">
+<!--Trained-->
+<Toggle class="toggleInput" id="weaponProficiencies_other1_0" position="-1083 -2013" width="35" height="33" />
+<!--Expert-->
+<Toggle class="toggleInput" id="weaponProficiencies_other1_1" position="-1040 -2013" width="35" height="33" />
+<!--Master-->
+<Toggle class="toggleInput" id="weaponProficiencies_other1_2" position="-995 -2013" width="35" height="33" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="weaponProficiencies_other1_3" position="-952 -2013" width="35" height="33" />
+</ToggleGroup>
+
+<!--Other Weapon Proficiency 2-->
+<ToggleGroup class="toggleGroup" id="weaponProficiencies_other2">
+<!--Trained-->
+<Toggle class="toggleInput" id="weaponProficiencies_other2_0" position="-488 -2013" width="35" height="33" />
+<!--Expert-->
+<Toggle class="toggleInput" id="weaponProficiencies_other2_1" position="-444 -2013" width="35" height="33" />
+<!--Master-->
+<Toggle class="toggleInput" id="weaponProficiencies_other2_2" position="-400 -2013" width="35" height="33" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="weaponProficiencies_other2_3" position="-356 -2013" width="35" height="33" />
+</ToggleGroup>
+
+<!--Acrobatics Proficiency-->
+<ToggleGroup class="toggleGroup" id="skills_acrobatics_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="skills_acrobatics_proficiency_0" position="1088 199" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="skills_acrobatics_proficiency_1" position="1131 199" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="skills_acrobatics_proficiency_2" position="1175 199" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="skills_acrobatics_proficiency_3" position="1218 199" width="35" height="56" />
+</ToggleGroup>
+
+<!--Arcana Proficiency-->
+<ToggleGroup class="toggleGroup" id="skills_arcana_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="skills_arcana_proficiency_0" position="1088 79" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="skills_arcana_proficiency_1" position="1131 79" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="skills_arcana_proficiency_2" position="1175 79" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="skills_arcana_proficiency_3" position="1218 79" width="35" height="56" />
+</ToggleGroup>
+
+<!--Athletics Proficiency-->
+<ToggleGroup class="toggleGroup" id="skills_athletics_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="skills_athletics_proficiency_0" position="1088 -40" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="skills_athletics_proficiency_1" position="1131 -40" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="skills_athletics_proficiency_2" position="1175 -40" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="skills_athletics_proficiency_3" position="1218 -40" width="35" height="56" />
+</ToggleGroup>
+
+<!--Crafting Proficiency-->
+<ToggleGroup class="toggleGroup" id="skills_crafting_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="skills_crafting_proficiency_0" position="1088 -159" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="skills_crafting_proficiency_1" position="1131 -159" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="skills_crafting_proficiency_2" position="1175 -159" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="skills_crafting_proficiency_3" position="1218 -159" width="35" height="56" />
+</ToggleGroup>
+
+<!--Deception Proficiency-->
+<ToggleGroup class="toggleGroup" id="skills_deception_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="skills_deception_proficiency_0" position="1088 -278" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="skills_deception_proficiency_1" position="1131 -278" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="skills_deception_proficiency_2" position="1175 -278" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="skills_deception_proficiency_3" position="1218 -278" width="35" height="56" />
+</ToggleGroup>
+
+<!--Diplomacy Proficiency-->
+<ToggleGroup class="toggleGroup" id="skills_diplomacy_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="skills_diplomacy_proficiency_0" position="1088 -398" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="skills_diplomacy_proficiency_1" position="1131 -398" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="skills_diplomacy_proficiency_2" position="1175 -398" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="skills_diplomacy_proficiency_3" position="1218 -398" width="35" height="56" />
+</ToggleGroup>
+
+<!--Intimidation Proficiency-->
+<ToggleGroup class="toggleGroup" id="skills_intimidation_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="skills_intimidation_proficiency_0" position="1088 -517" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="skills_intimidation_proficiency_1" position="1131 -517" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="skills_intimidation_proficiency_2" position="1175 -517" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="skills_intimidation_proficiency_3" position="1218 -517" width="35" height="56" />
+</ToggleGroup>
+
+<!--Lore 1 Proficiency-->
+<ToggleGroup class="toggleGroup" id="skills_lore1_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="skills_lore1_proficiency_0" position="1088 -637" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="skills_lore1_proficiency_1" position="1131 -637" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="skills_lore1_proficiency_2" position="1175 -637" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="skills_lore1_proficiency_3" position="1218 -637" width="35" height="56" />
+</ToggleGroup>
+
+<!--Lore 2 Proficiency-->
+<ToggleGroup class="toggleGroup" id="skills_lore2_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="skills_lore2_proficiency_0" position="1088 -756" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="skills_lore2_proficiency_1" position="1131 -756" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="skills_lore2_proficiency_2" position="1175 -756" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="skills_lore2_proficiency_3" position="1218 -756" width="35" height="56" />
+</ToggleGroup>
+
+<!--Medicine Proficiency-->
+<ToggleGroup class="toggleGroup" id="skills_medicine_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="skills_medicine_proficiency_0" position="1088 -876" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="skills_medicine_proficiency_1" position="1131 -876" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="skills_medicine_proficiency_2" position="1175 -876" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="skills_medicine_proficiency_3" position="1218 -876" width="35" height="56" />
+</ToggleGroup>
+
+<!--Nature Proficiency-->
+<ToggleGroup class="toggleGroup" id="skills_nature_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="skills_nature_proficiency_0" position="1088 -996" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="skills_nature_proficiency_1" position="1131 -996" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="skills_nature_proficiency_2" position="1175 -996" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="skills_nature_proficiency_3" position="1218 -996" width="35" height="56" />
+</ToggleGroup>
+
+<!--Occultism Proficiency-->
+<ToggleGroup class="toggleGroup" id="skills_occultism_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="skills_occultism_proficiency_0" position="1088 -1116" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="skills_occultism_proficiency_1" position="1131 -1116" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="skills_occultism_proficiency_2" position="1175 -1116" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="skills_occultism_proficiency_3" position="1218 -1116" width="35" height="56" />
+</ToggleGroup>
+
+<!--Performance Proficiency-->
+<ToggleGroup class="toggleGroup" id="skills_performance_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="skills_performance_proficiency_0" position="1088 -1234" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="skills_performance_proficiency_1" position="1131 -1234" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="skills_performance_proficiency_2" position="1175 -1234" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="skills_performance_proficiency_3" position="1218 -1234" width="35" height="56" />
+</ToggleGroup>
+
+<!--Religion Proficiency-->
+<ToggleGroup class="toggleGroup" id="skills_religion_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="skills_religion_proficiency_0" position="1087 -1354" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="skills_religion_proficiency_1" position="1131 -1354" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="skills_religion_proficiency_2" position="1175 -1354" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="skills_religion_proficiency_3" position="1218 -1354" width="35" height="56" />
+</ToggleGroup>
+
+<!--Society Proficiency-->
+<ToggleGroup class="toggleGroup" id="skills_society_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="skills_society_proficiency_0" position="1088 -1473" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="skills_society_proficiency_1" position="1131 -1473" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="skills_society_proficiency_2" position="1175 -1473" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="skills_society_proficiency_3" position="1218 -1473" width="35" height="56" />
+</ToggleGroup>
+
+<!--Stealth Proficiency-->
+<ToggleGroup class="toggleGroup" id="skills_stealth_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="skills_stealth_proficiency_0" position="1088 -1593" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="skills_stealth_proficiency_1" position="1131 -1593" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="skills_stealth_proficiency_2" position="1175 -1593" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="skills_stealth_proficiency_3" position="1218 -1593" width="35" height="56" />
+</ToggleGroup>
+
+<!--Survival Proficiency-->
+<ToggleGroup class="toggleGroup" id="skills_survival_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="skills_survival_proficiency_0" position="1088 -1712" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="skills_survival_proficiency_1" position="1131 -1712" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="skills_survival_proficiency_2" position="1175 -1712" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="skills_survival_proficiency_3" position="1218 -1712" width="35" height="56" />
+</ToggleGroup>
+
+<!--Thievery Proficiency-->
+<ToggleGroup class="toggleGroup" id="skills_thievery_proficiency">
+<!--Trained-->
+<Toggle class="toggleInput" id="skills_thievery_proficiency_0" position="1088 -1831" width="35" height="56" />
+<!--Expert-->
+<Toggle class="toggleInput" id="skills_thievery_proficiency_1" position="1131 -1831" width="35" height="56" />
+<!--Master-->
+<Toggle class="toggleInput" id="skills_thievery_proficiency_2" position="1175 -1831" width="35" height="56" />
+<!--Legendary-->
+<Toggle class="toggleInput" id="skills_thievery_proficiency_3" position="1218 -1831" width="35" height="56" />
+</ToggleGroup>
+
+<!--Automatically-Calculating Text Boxes-->
+
+<!--Strength Modifier-->
+<Button class="autoButton" id="abilityScores_strength" position="-1445 1414" width="138" height="107" fontSize="72">0</Button>
+<!--Dexterity Modifier-->
+<Button class="autoButton" id="abilityScores_dexterity" position="-1445 1263" width="138" height="107" fontSize="72">0</Button>
+<!--Constitution Modifier-->
+<Button class="autoButton" id="abilityScores_constitution" position="-1445 1113" width="138" height="107" fontSize="72">0</Button>
+<!--Intelligence Modifier-->
+<Button class="autoButton" id="abilityScores_intelligence" position="-1445 963" width="138" height="107" fontSize="72">0</Button>
+<!--Wisdom Modifier-->
+<Button class="autoButton" id="abilityScores_wisdom" position="-1445 813" width="138" height="107" fontSize="72">0</Button>
+<!--Charisma Modifier-->
+<Button class="autoButton" id="abilityScores_charisma" position="-1445 663" width="138" height="107" fontSize="72">0</Button>
+
+<!--Class DC-->
+<Text class="autoText" id="classDC_modifier" position="-1445 442" width="138" height="117" fontSize="64">10</Text>
+<!--Class Proficiency Bonus-->
+<Text class="autoText" id="classDC_proficiency_bonus" position="-975 429" width="121" height="74" fontSize="56">0</Text>
+
+<!--Armor Class-->
+<Text class="autoText" id="armor_class" position="-272 1355" width="170" height="112" fontSize="96">10</Text>
+<!--Dexterity Modifier-->
+<Text class="autoText" id="armor_dexterity" position="68 1395" width="111" height="94" fontSize="56">0</Text>
+<!--AC Proficiency Bonus-->
+<Text class="autoText" id="armor_proficiency_bonus" position="357 1395" width="125" height="93" fontSize="56">0</Text>
+
+<!--Fortitude Modifier-->
+<Button class="autoButton" id="savingThrows_fortitude_modifier" position="-274 850" width="141" height="91" fontSize="72">0</Button>
+<!--Constitution Modifier-->
+<Text class="autoText" id="savingThrows_fortitude_constitution" position="-367 706" width="120" height="86" fontSize="56">0</Text>
+<!--Fortitude Proficiency Bonus-->
+<Text class="autoText" id="savingThrows_fortitude_proficiency_bonus" position="-196 706" width="120" height="86" fontSize="56">0</Text>
+<!--Reflex Modifier-->
+<Button class="autoButton" id="savingThrows_reflex_modifier" position="164 850" width="141" height="91" fontSize="72">0</Button>
+<!--Dexterity Modifier-->
+<Text class="autoText" id="savingThrows_reflex_dexterity" position="73 706" width="120" height="86" fontSize="56">0</Text>
+<!--Reflex Proficiency Bonus-->
+<Text class="autoText" id="savingThrows_reflex_proficiency_bonus" position="241 706" width="120" height="86" fontSize="56">0</Text>
+<!--Will Modifier-->
+<Button class="autoButton" id="savingThrows_will_modifier" position="598 850" width="141" height="91" fontSize="72">0</Button>
+<!--Wisdom Modifier-->
+<Text class="autoText" id="savingThrows_will_wisdom" position="506 706" width="120" height="86" fontSize="56">0</Text>
+<!--Will Proficiency Bonus-->
+<Text class="autoText" id="savingThrows_will_proficiency_bonus" position="673 706" width="120" height="86" fontSize="56">0</Text>
+
+<!--Perception Modifier-->
+<Button class="autoButton" id="perception_modifier" position="929 709" width="168" height="106" fontSize="84">0</Button>
+<!--Wisdom Modifier-->
+<Text class="autoText" id="perception_wisdom" position="1049 605" width="107" height="86" fontSize="56">0</Text>
+<!--Perception Proficiency Bonus-->
+<Text class="autoText" id="perception_proficiency_bonus" position="1173 605" width="103" height="86" fontSize="56">0</Text>
+
+<!--Melee Weapon 1 Hit Modifier-->
+<Button class="autoButton" id="strikes_melee1_modifier" position="-721 75" width="141" height="91" fontSize="72">0</Button>
+<!--Melee Weapon 1 Hit Proficiency Bonus-->
+<Text class="autoText" id="strikes_melee1_proficiency_bonus" position="-348 44" width="123" height="91" fontSize="64">0</Text>
+<!--Melee Weapon 2 Hit Modifier-->
+<Button class="autoButton" id="strikes_melee2_modifier" position="-721 -241" width="141" height="91" fontSize="72">0</Button>
+<!--Melee Weapon 2 Hit Proficiency Bonus-->
+<Text class="autoText" id="strikes_melee2_proficiency_bonus" position="-348 -269" width="123" height="91" fontSize="64">0</Text>
+<!--Melee Weapon 3 Hit Modifier-->
+<Button class="autoButton" id="strikes_melee3_modifier" position="-721 -560" width="141" height="91" fontSize="72">0</Button>
+<!--Melee Weapon 3 Hit Proficiency Bonus-->
+<Text class="autoText" id="strikes_melee3_proficiency_bonus" position="-348 -584" width="123" height="91" fontSize="64">0</Text>
+
+<!--Ranged Weapon 1 Hit Modifier-->
+<Button class="autoButton" id="strikes_ranged1_modifier" position="-723 -980" width="141" height="91" fontSize="72">0</Button>
+<!--Ranged Weapon 1 Hit Proficiency Bonus-->
+<Text class="autoText" id="strikes_ranged1_proficiency_bonus" position="-346 -984" width="123" height="91" fontSize="56">0</Text>
+<!--Ranged Weapon 2 Hit Modifier-->
+<Button class="autoButton" id="strikes_ranged2_modifier" position="-723 -1289" width="141" height="91" fontSize="72">0</Button>
+<!--Ranged Weapon 2 Hit Proficiency Bonus-->
+<Text class="autoText" id="strikes_ranged2_proficiency_bonus" position="-346 -1295" width="123" height="91" fontSize="56">0</Text>
+<!--Ranged Weapon 3 Hit Modifier-->
+<Button class="autoButton" id="strikes_ranged3_modifier" position="-723 -1598" width="141" height="91" fontSize="72">0</Button>
+<!--Ranged Weapon 3 Hit Proficiency Bonus-->
+<Text class="autoText" id="strikes_ranged3_proficiency_bonus" position="-346 -1602" width="123" height="91" fontSize="56">0</Text>
+
+<!--Acrobatics Modifier-->
+<Button class="autoButton" id="skills_acrobatics_modifier" position="651 213" width="125" height="85" fontSize="64">0</Button>
+<!--Dexterity Modifier-->
+<Text class="autoText" id="skills_acrobatics_dexterity" position="841 208" width="127" height="76" fontSize="56">0</Text>
+<!--Acrobatics Proficiency Bonus-->
+<Text class="autoText" id="skills_acrobatics_proficiency_bonus" position="988 208" width="127" height="76" fontSize="56">0</Text>
+<!--Arcana Modifier-->
+<Button class="autoButton" id="skills_arcana_modifier" position="651 94" width="125" height="85" fontSize="64">0</Button>
+<!--Intelligence Modifier-->
+<Text class="autoText" id="skills_arcana_intelligence" position="841 87" width="127" height="76" fontSize="56">0</Text>
+<!--Arcana Proficiency Bonus-->
+<Text class="autoText" id="skills_arcana_proficiency_bonus" position="988 87" width="127" height="76" fontSize="56">0</Text>
+<!--Athletics Modifier-->
+<Button class="autoButton" id="skills_athletics_modifier" position="651 -27" width="125" height="85" fontSize="64">0</Button>
+<!--Strength Modifier-->
+<Text class="autoText" id="skills_athletics_strength" position="841 -32" width="127" height="76" fontSize="56">0</Text>
+<!--Athletics Proficiency Bonus-->
+<Text class="autoText" id="skills_athletics_proficiency_bonus" position="988 -32" width="127" height="76" fontSize="56">0</Text>
+<!--Crafting Modifier-->
+<Button class="autoButton" id="skills_crafting_modifier" position="651 -147" width="125" height="85" fontSize="64">0</Button>
+<!--Intelligence Modifier-->
+<Text class="autoText" id="skills_crafting_intelligence" position="841 -152" width="127" height="76" fontSize="56">0</Text>
+<!--Crafting Proficiency Bonus-->
+<Text class="autoText" id="skills_crafting_proficiency_bonus" position="988 -152" width="127" height="76" fontSize="56">0</Text>
+<!--Deception Modifier-->
+<Button class="autoButton" id="skills_deception_modifier" position="651 -266" width="125" height="85" fontSize="64">0</Button>
+<!--Charisma Modifier-->
+<Text class="autoText" id="skills_deception_charisma" position="841 -270" width="127" height="76" fontSize="56">0</Text>
+<!--Deception Proficiency Bonus-->
+<Text class="autoText" id="skills_deception_proficiency_bonus" position="988 -270" width="127" height="76" fontSize="56">0</Text>
+<!--Diplomacy Modifier-->
+<Button class="autoButton" id="skills_diplomacy_modifier" position="651 -384" width="125" height="85" fontSize="64">0</Button>
+<!--Charisma Modifier-->
+<Text class="autoText" id="skills_diplomacy_charisma" position="841 -390" width="127" height="76" fontSize="56">0</Text>
+<!--Diplomacy Proficiency Bonus-->
+<Text class="autoText" id="skills_diplomacy_proficiency_bonus" position="988 -390" width="127" height="76" fontSize="56">0</Text>
+<!--Intimidation Modifier-->
+<Button class="autoButton" id="skills_intimidation_modifier" position="651 -504" width="125" height="85" fontSize="64">0</Button>
+<!--Charisma Modifier-->
+<Text class="autoText" id="skills_intimidation_charisma" position="841 -510" width="127" height="76" fontSize="56">0</Text>
+<!--Intimidation Proficiency Bonus-->
+<Text class="autoText" id="skills_intimidation_proficiency_bonus" position="988 -510" width="127" height="76" fontSize="56">0</Text>
+<!--Lore 1 Modifier-->
+<Button class="autoButton" id="skills_lore1_modifier" position="651 -625" width="125" height="85" fontSize="64">0</Button>
+<!--Intelligence Modifier-->
+<Text class="autoText" id="skills_lore1_intelligence" position="841 -629" width="127" height="76" fontSize="56">0</Text>
+<!--Lore 1 Proficiency Bonus-->
+<Text class="autoText" id="skills_lore1_proficiency_bonus" position="988 -629" width="127" height="76" fontSize="56">0</Text>
+<!--Lore 2 Modifier-->
+<Button class="autoButton" id="skills_lore2_modifier" position="651 -743" width="125" height="85" fontSize="64">0</Button>
+<!--Intelligence Modifier-->
+<Text class="autoText" id="skills_lore2_intelligence" position="841 -749" width="127" height="76" fontSize="56">0</Text>
+<!--Lore 2 Proficiency Bonus-->
+<Text class="autoText" id="skills_lore2_proficiency_bonus" position="988 -749" width="127" height="76" fontSize="56">0</Text>
+<!--Medicine Modifier-->
+<Button class="autoButton" id="skills_medicine_modifier" position="651 -865" width="125" height="85" fontSize="64">0</Button>
+<!--Wisdom Modifier-->
+<Text class="autoText" id="skills_medicine_wisdom" position="841 -869" width="127" height="76" fontSize="56">0</Text>
+<!--Medicine Proficiency Bonus-->
+<Text class="autoText" id="skills_medicine_proficiency_bonus" position="988 -869" width="127" height="76" fontSize="56">0</Text>
+<!--Nature Modifier-->
+<Button class="autoButton" id="skills_nature_modifier" position="651 -983" width="125" height="85" fontSize="64">0</Button>
+<!--Wisdom Modifier-->
+<Text class="autoText" id="skills_nature_wisdom" position="841 -988" width="127" height="76" fontSize="56">0</Text>
+<!--Nature Proficiency Bonus-->
+<Text class="autoText" id="skills_nature_proficiency_bonus" position="988 -988" width="127" height="76" fontSize="56">0</Text>
+<!--Occultism Modifier-->
+<Button class="autoButton" id="skills_occultism_modifier" position="651 -1102" width="125" height="85" fontSize="64">0</Button>
+<!--Intelligence Modifier-->
+<Text class="autoText" id="skills_occultism_intelligence" position="841 -1108" width="127" height="76" fontSize="56">0</Text>
+<!--Occultism Proficiency Bonus-->
+<Text class="autoText" id="skills_occultism_proficiency_bonus" position="988 -1108" width="127" height="76" fontSize="56">0</Text>
+<!--Performance Modifier-->
+<Button class="autoButton" id="skills_performance_modifier" position="651 -1222" width="125" height="85" fontSize="64">0</Button>
+<!--Charisma Modifier-->
+<Text class="autoText" id="skills_performance_charisma" position="841 -1228" width="127" height="76" fontSize="56">0</Text>
+<!--Performance Proficiency Bonus-->
+<Text class="autoText" id="skills_performance_proficiency_bonus" position="988 -1228" width="127" height="76" fontSize="56">0</Text>
+<!--Religion Modifier-->
+<Button class="autoButton" id="skills_religion_modifier" position="651 -1341" width="125" height="85" fontSize="64">0</Button>
+<!--Wisdom Modifier-->
+<Text class="autoText" id="skills_religion_wisdom" position="841 -1347" width="127" height="76" fontSize="56">0</Text>
+<!--Religion Proficiency Bonus-->
+<Text class="autoText" id="skills_religion_proficiency_bonus" position="988 -1347" width="127" height="76" fontSize="56">0</Text>
+<!--Society Modifier-->
+<Button class="autoButton" id="skills_society_modifier" position="651 -1460" width="125" height="85" fontSize="64">0</Button>
+<!--Intelligence Modifier-->
+<Text class="autoText" id="skills_society_intelligence" position="841 -1467" width="127" height="76" fontSize="56">0</Text>
+<!--Society Proficiency Bonus-->
+<Text class="autoText" id="skills_society_proficiency_bonus" position="988 -1467" width="127" height="76" fontSize="56">0</Text>
+<!--Stealth Modifier-->
+<Button class="autoButton" id="skills_stealth_modifier" position="651 -1580" width="125" height="85" fontSize="64">0</Button>
+<!--Dexterity Modifier-->
+<Text class="autoText" id="skills_stealth_dexterity" position="841 -1585" width="127" height="76" fontSize="56">0</Text>
+<!--Stealth Proficiency Bonus-->
+<Text class="autoText" id="skills_stealth_proficiency_bonus" position="988 -1585" width="127" height="76" fontSize="56">0</Text>
+<!--Survival Modifier-->
+<Button class="autoButton" id="skills_survival_modifier" position="651 -1699" width="125" height="85" fontSize="64">0</Button>
+<!--Wisdom Modifier-->
+<Text class="autoText" id="skills_survival_wisdom" position="841 -1705" width="127" height="76" fontSize="56">0</Text>
+<!--Survival Proficiency Bonus-->
+<Text class="autoText" id="skills_survival_proficiency_bonus" position="988 -1705" width="127" height="76" fontSize="56">0</Text>
+<!--Thievery Modifier-->
+<Button class="autoButton" id="skills_thievery_modifier" position="651 -1819" width="125" height="85" fontSize="64">0</Button>
+<!--Dexterity Modifier-->
+<Text class="autoText" id="skills_thievery_dexterity" position="841 -1825" width="127" height="76" fontSize="56">0</Text>
+<!--Thievery Proficiency Bonus-->
+<Text class="autoText" id="skills_thievery_proficiency_bonus" position="988 -1825" width="127" height="76" fontSize="56">0</Text>
+</Panel>

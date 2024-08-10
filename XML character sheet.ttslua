@@ -1,0 +1,561 @@
+state = {}
+rollNames = {
+    abilityScores_strength = "Strength",
+    abilityScores_dexterity = "Dexterity",
+    abilityScores_constitution = "Constitution",
+    abilityScores_intelligence = "Intelligence",
+    abilityScores_wisdom = "Wisdom",
+    abilityScores_charisma = "Charisma",
+
+    savingThrows_fortitude_modifier = "Fortitude",
+    savingThrows_reflex_modifier = "Reflex",
+    savingThrows_will_modifier = "Will",
+
+    perception_modifier = "Perception",
+
+    strikes_melee1_modifier = "strikes_melee1_name",
+    strikes_melee2_modifier = "strikes_melee2_name",
+    strikes_melee3_modifier = "strikes_melee3_name",
+    strikes_ranged1_modifier = "strikes_ranged1_name",
+    strikes_ranged2_modifier = "strikes_ranged2_name",
+    strikes_ranged3_modifier = "strikes_ranged3_name",
+
+    skills_acrobatics_modifier = "Acrobatics",
+    skills_arcana_modifier = "Arcana",
+    skills_athletics_modifier = "Athletics",
+    skills_crafting_modifier = "Crafting",
+    skills_deception_modifier = "Deception",
+    skills_diplomacy_modifier = "Diplomacy",
+    skills_intimidation_modifier = "Intimidation",
+    skills_lore1_modifier = "skills_lore1_type",
+    skills_lore2_modifier = "skills_lore2_type",
+    skills_medicine_modifier = "Medicine",
+    skills_nature_modifier = "Nature",
+    skills_occultism_modifier = "Occultism",
+    skills_performance_modifier = "Performance",
+    skills_religion_modifier = "Religion",
+    skills_society_modifier = "Society",
+    skills_stealth_modifier = "Stealth",
+    skills_survival_modifier = "Survival",
+    skills_thievery_modifier = "Thievery"
+}
+
+disableSave = false
+debugging = false
+
+function autoRoll(player,option,id)
+    -- printThis("((Roll by [u]" .. Player[player.color].steam_name.."[/u]))", player.color)
+    -- printThis("((Roll by [u]" .. state["characterName"] .."[/u]))", player.color)
+    local printName = id
+    if string.sub(id, 1, string.len(id) - 10) == "strikes_melee"
+            or string.sub(id, 1, string.len(id) - 10) == "strikes_ranged" then
+        printName = state[rollNames[id]]
+    elseif string.sub(id, 1, string.len(id) - 10) == "skills_lore" then
+        printName = state[rollNames[id]] .. " Lore"
+    else
+        printName = rollNames[id]
+    end
+
+    local prevPM = printMode
+    if printMode ~= "ALL" or option=="-2" then
+        printMode = "GM"
+        printThis("((Secret Roll by [u]" .. state["characterName"] .."[/u]))", player.color)
+        printToColor("((You rolled "..printName.." in secret))", player.color, stringColorToRGB(player.color))
+    else
+        printThis("((Roll by [u]" .. state["characterName"] .."[/u]))", player.color)
+    end
+
+    local roll = math.random(1,20)
+    printThis("(d20)  "..roll)
+
+    printThis("("..printName..")   "..state[id])
+    printThis("[u](TOTAL)[/u]  " .. tostring(state[id] + roll))
+    printMode = prevPM
+end
+
+--Function which does the printing, called on by autoroll()
+function printThis(stringForPrint, colorForPrint)
+    if printMode == "ALL" then
+        printToAll(stringForPrint, stringColorToRGB(colorForPrint))
+    elseif Player["Black"].seated then
+        printToColor(stringForPrint, "Black", stringColorToRGB(colorForPrint))
+    end
+end
+
+--Toggle print mode
+function toggleMode(player, isOn, id)
+    if isOn == "True" then
+        printMode = "GM"
+        self.UI.setAttribute("printToggle", 'text', "GM")
+    else
+        printMode = "ALL"
+        self.UI.setAttribute("printToggle", 'text', "ALL")
+    end
+end
+
+function updateState(player, value, id)
+    state[id] = value
+end
+
+function onToggleChanged(player, value, id)
+    local toggleID = string.sub(id, 1, string.len(id) - 2)
+
+    if value == 'False' then
+        state[toggleID] = ''
+    else
+        state[toggleID] = string.sub(id, string.len(id))
+    end
+
+    if string.sub(toggleID, string.len(toggleID) - 11) == '_proficiency' then
+        updateProficiencyAutoBox(toggleID, toggleID .. '_bonus')
+    end
+end
+
+function updateProficiencyAutoBox(toggleID, boxID)
+    if state[toggleID] ~= '' then
+        state[boxID] = (tonumber(state[toggleID]) + 1) * 2 + makeNumber(state.level)
+    else
+        state[boxID] = '0'
+    end
+
+    calculateTotals()
+    updateVisualState()
+end
+
+function makeNumber(int)
+    if int ~= nil and int ~= '' then
+        return tonumber(int)
+    else
+        return 0
+    end
+end
+
+function calculateTotals()
+    state.classDC_modifier = 10 + makeNumber(state.classDC_keyBonus) + makeNumber(state.classDC_proficiency_bonus) + makeNumber(state.classDC_itemBonus)
+
+    local maxDex = makeNumber(state.abilityScores_dexterity)
+    if state.armor_cap ~= '' then
+        maxDex = math.min(maxDex, tonumber(state.armor_cap))
+    end
+    state.armor_class = 10 + maxDex + makeNumber(state.armor_proficiency_bonus) + makeNumber(state.armor_itemBonus)
+
+    state.savingThrows_fortitude_modifier = makeNumber(state.abilityScores_constitution) + makeNumber(state.savingThrows_fortitude_proficiency_bonus) + makeNumber(state.savingThrows_fortitude_itemBonus)
+    state.savingThrows_reflex_modifier = makeNumber(state.abilityScores_dexterity) + makeNumber(state.savingThrows_reflex_proficiency_bonus) + makeNumber(state.savingThrows_reflex_itemBonus)
+    state.savingThrows_will_modifier = makeNumber(state.abilityScores_wisdom) + makeNumber(state.savingThrows_will_proficiency_bonus) + makeNumber(state.savingThrows_will_itemBonus)
+
+    state.perception_modifier = makeNumber(state.abilityScores_wisdom) + makeNumber(state.perception_proficiency_bonus) + makeNumber(state.perception_itemBonus)
+
+    state.strikes_melee1_modifier = makeNumber(state.strikes_melee1_hitModifier) + makeNumber(state.strikes_melee1_proficiency_bonus) + makeNumber(state.strikes_melee1_itemBonus)
+    state.strikes_melee2_modifier = makeNumber(state.strikes_melee2_hitModifier) + makeNumber(state.strikes_melee2_proficiency_bonus) + makeNumber(state.strikes_melee2_itemBonus)
+    state.strikes_melee3_modifier = makeNumber(state.strikes_melee3_hitModifier) + makeNumber(state.strikes_melee3_proficiency_bonus) + makeNumber(state.strikes_melee3_itemBonus)
+    state.strikes_ranged1_modifier = makeNumber(state.strikes_ranged1_hitModifier) + makeNumber(state.strikes_ranged1_proficiency_bonus) + makeNumber(state.strikes_ranged1_itemBonus)
+    state.strikes_ranged2_modifier = makeNumber(state.strikes_ranged2_hitModifier) + makeNumber(state.strikes_ranged2_proficiency_bonus) + makeNumber(state.strikes_ranged2_itemBonus)
+    state.strikes_ranged3_modifier = makeNumber(state.strikes_ranged3_hitModifier) + makeNumber(state.strikes_ranged3_proficiency_bonus) + makeNumber(state.strikes_ranged3_itemBonus)
+
+    state.skills_acrobatics_modifier = makeNumber(state.abilityScores_dexterity) + makeNumber(state.skills_acrobatics_proficiency_bonus) + makeNumber(state.skills_acrobatics_itemBonus) - makeNumber(state.skills_acrobatics_armorPenalty)
+    state.skills_arcana_modifier = makeNumber(state.abilityScores_intelligence) + makeNumber(state.skills_arcana_proficiency_bonus) + makeNumber(state.skills_arcana_itemBonus)
+    state.skills_athletics_modifier = makeNumber(state.abilityScores_strength) + makeNumber(state.skills_athletics_proficiency_bonus) + makeNumber(state.skills_athletics_itemBonus) - makeNumber(state.skills_athletics_armorPenalty)
+    state.skills_crafting_modifier = makeNumber(state.abilityScores_intelligence) + makeNumber(state.skills_crafting_proficiency_bonus) + makeNumber(state.skills_crafting_itemBonus)
+    state.skills_deception_modifier = makeNumber(state.abilityScores_charisma) + makeNumber(state.skills_deception_proficiency_bonus) + makeNumber(state.skills_deception_itemBonus)
+    state.skills_diplomacy_modifier = makeNumber(state.abilityScores_charisma) + makeNumber(state.skills_diplomacy_proficiency_bonus) + makeNumber(state.skills_diplomacy_itemBonus)
+    state.skills_intimidation_modifier = makeNumber(state.abilityScores_charisma) + makeNumber(state.skills_intimidation_proficiency_bonus) + makeNumber(state.skills_intimidation_itemBonus)
+    state.skills_lore1_modifier = makeNumber(state.abilityScores_intelligence) + makeNumber(state.skills_lore1_proficiency_bonus) + makeNumber(state.skills_lore1_itemBonus)
+    state.skills_lore2_modifier = makeNumber(state.abilityScores_intelligence) + makeNumber(state.skills_lore2_proficiency_bonus) + makeNumber(state.skills_lore2_itemBonus)
+    state.skills_medicine_modifier = makeNumber(state.abilityScores_wisdom) + makeNumber(state.skills_medicine_proficiency_bonus) + makeNumber(state.skills_medicine_itemBonus)
+    state.skills_nature_modifier = makeNumber(state.abilityScores_wisdom) + makeNumber(state.skills_nature_proficiency_bonus) + makeNumber(state.skills_nature_itemBonus)
+    state.skills_occultism_modifier = makeNumber(state.abilityScores_intelligence) + makeNumber(state.skills_occultism_proficiency_bonus) + makeNumber(state.skills_occultism_itemBonus)
+    state.skills_performance_modifier = makeNumber(state.abilityScores_charisma) + makeNumber(state.skills_performance_proficiency_bonus) + makeNumber(state.skills_performance_itemBonus)
+    state.skills_religion_modifier = makeNumber(state.abilityScores_wisdom) + makeNumber(state.skills_religion_proficiency_bonus) + makeNumber(state.skills_religion_itemBonus)
+    state.skills_society_modifier = makeNumber(state.abilityScores_intelligence) + makeNumber(state.skills_society_proficiency_bonus) + makeNumber(state.skills_society_itemBonus)
+    state.skills_stealth_modifier = makeNumber(state.abilityScores_dexterity) + makeNumber(state.skills_stealth_proficiency_bonus) + makeNumber(state.skills_stealth_itemBonus) - makeNumber(state.skills_stealth_armorPenalty)
+    state.skills_survival_modifier = makeNumber(state.abilityScores_wisdom) + makeNumber(state.skills_survival_proficiency_bonus) + makeNumber(state.skills_survival_itembonus)
+    state.skills_thievery_modifier = makeNumber(state.abilityScores_dexterity) + makeNumber(state.skills_thievery_proficiency_bonus) + makeNumber(state.skills_thievery_itemBonus) - makeNumber(state.skills_thievery_armorPenalty)
+end
+
+function updateAutoBoxes(player, value, id)
+    if id == 'level' then
+        for k in pairs(state) do
+            if string.sub(k, string.len(k) - 11) == '_proficiency' then
+                if state[k] ~= '' then
+                    state[k .. '_bonus'] = (tonumber(state[k]) + 1) * 2 + makeNumber(state.level)
+                else
+                    state[k .. '_bonus'] = '0'
+                end
+            end
+        end
+    elseif id == 'abilityScores_strength_score' then
+        local strengthMod = math.floor((tonumber(value))
+        for k in pairs(state) do
+            if string.sub(k, string.len(k) - 8) == '_strength' then
+                state[k] = strengthMod
+            end
+        end
+    elseif id == 'abilityScores_dexterity_score' then
+        local dexterityMod = math.floor((tonumber(value))
+        for k in pairs(state) do
+            if string.sub(k, string.len(k) - 9) == '_dexterity' then
+                state[k] = dexterityMod
+            end
+        end
+    elseif id == 'abilityScores_constitution_score' then
+        local constitutionMod = math.floor((tonumber(value))
+        for k in pairs(state) do
+            if string.sub(k, string.len(k) - 12) == '_constitution' then
+                state[k] = constitutionMod
+            end
+        end
+    elseif id == 'abilityScores_intelligence_score' then
+        local intelligenceMod = math.floor((tonumber(value))
+        for k in pairs(state) do
+            if string.sub(k, string.len(k) - 12) == '_intelligence' then
+                state[k] = intelligenceMod
+            end
+        end
+    elseif id == 'abilityScores_wisdom_score' then
+        local wisdomMod = math.floor((tonumber(value))
+        for k in pairs(state) do
+            if string.sub(k, string.len(k) - 6) == '_wisdom' then
+                state[k] = wisdomMod
+            end
+        end
+    elseif id == 'abilityScores_charisma_score' then
+        local charismaMod = math.floor((tonumber(value))
+        for k in pairs(state) do
+            if string.sub(k, string.len(k) - 8) == '_charisma' then
+                state[k] = charismaMod
+            end
+        end
+    end
+    calculateTotals()
+    updateVisualState()
+end
+
+function setToDefaults()
+    state = {
+        characterName = '',
+        playerName = '',
+        experience = '',
+        ancestry = '',
+        background = '',
+        class = '',
+        size = '',
+        alignment = '',
+        traits = '',
+        deity = '',
+        level = '',
+        heroPoints = '',
+
+        abilityScores_strength_score = '10',
+        abilityScores_strength = '0',
+        abilityScores_dexterity_score = '10',
+        abilityScores_dexterity = '0',
+        abilityScores_constitution_score = '10',
+        abilityScores_constitution = '0',
+        abilityScores_intelligence_score = '10',
+        abilityScores_intelligence = '0',
+        abilityScores_wisdom_score = '10',
+        abilityScores_wisdom = '0',
+        abilityScores_charisma_score = '10',
+        abilityScores_charisma = '0',
+
+        classDC_modifier = '0',
+        classDC_keyBonus = '',
+        classDC_proficiency = '',
+        classDC_proficiency_bonus = '0',
+        classDC_itemBonus = '',
+
+        armor_class = '10',
+        armor_dexterity = '0',
+        armor_cap = '',
+        armor_proficiency = '',
+        armor_proficiency_bonus = '0',
+        armor_itemBonus = '',
+        armor_unarmoredProficiency = '',
+        armor_lightProficiency = '',
+        armor_mediumProficiency = '',
+        armor_heavyProficiency = '',
+
+        shield_acBonus = '',
+        shield_hardness = '',
+        shield_maxHP = '',
+        shield_brokenThreshold = '',
+        shield_currentHP = '',
+
+        savingThrows_fortitude_modifier = '0',
+        savingThrows_fortitude_constitution = '0',
+        savingThrows_fortitude_proficiency = '',
+        savingThrows_fortitude_proficiency_bonus = '0',
+        savingThrows_fortitude_itemBonus = '',
+        savingThrows_reflex_modifier = '0',
+        savingThrows_reflex_dexterity = '0',
+        savingThrows_reflex_proficiency = '',
+        savingThrows_reflex_proficiency_bonus = '0',
+        savingThrows_reflex_itemBonus = '',
+        savingThrows_will_modifier = '0',
+        savingThrows_will_wisdom = '0',
+        savingThrows_will_proficiency = '',
+        savingThrows_will_proficiency_bonus = '0',
+        savingThrows_will_itemBonus = '',
+        savingThrows_notes = '',
+
+        hitPoints_max = '',
+        hitPoints_current = '',
+        hitPoints_temporary = '',
+        hitPoints_dying = '',
+        hitPoints_wounded = '',
+        hitPoints_resistances = '',
+        hitPoints_conditions = '',
+
+        perception_modifier = '0',
+        perception_wisdom = '0',
+        perception_proficiency = '',
+        perception_proficiency_bonus = '0',
+        perception_itemBonus = '',
+        perception_senses = '',
+
+        movement_speed = '',
+        movement_notes = '',
+
+        strikes_melee1_name = '',
+        strikes_melee1_modifier = '0',
+        strikes_melee1_hitModifier = '',
+        strikes_melee1_proficiency = '',
+        strikes_melee1_proficiency_bonus = '0',
+        strikes_melee1_itemBonus = '',
+        strikes_melee1_damageDice = '',
+        strikes_melee1_damageModifier = '',
+        strikes_melee1_damageType = '',
+        strikes_melee1_weaponSpecialization = '',
+        strikes_melee1_other = '',
+        strikes_melee1_traits = '',
+
+        strikes_melee2_name = '',
+        strikes_melee2_modifier = '0',
+        strikes_melee2_hitModifier = '',
+        strikes_melee2_proficiency = '',
+        strikes_melee2_proficiency_bonus = '0',
+        strikes_melee2_itemBonus = '',
+        strikes_melee2_damageDice = '',
+        strikes_melee2_damageModifier = '',
+        strikes_melee2_damageType = '',
+        strikes_melee2_weaponSpecialization = '',
+        strikes_melee2_other = '',
+        strikes_melee2_traits = '',
+
+        strikes_melee3_name = '',
+        strikes_melee3_modifier = '0',
+        strikes_melee3_hitModifier = '',
+        strikes_melee3_proficiency = '',
+        strikes_melee3_proficiency_bonus = '0',
+        strikes_melee3_itemBonus = '',
+        strikes_melee3_damageDice = '',
+        strikes_melee3_damageModifier = '',
+        strikes_melee3_damageType = '',
+        strikes_melee3_weaponSpecialization = '',
+        strikes_melee3_other = '',
+        strikes_melee3_traits = '',
+
+        strikes_ranged1_name = '',
+        strikes_ranged1_modifier = '0',
+        strikes_ranged1_hitModifier = '',
+        strikes_ranged1_proficiency = '',
+        strikes_ranged1_proficiency_bonus = '0',
+        strikes_ranged1_itemBonus = '',
+        strikes_ranged1_damageDice = '',
+        strikes_ranged1_damageModifier = '',
+        strikes_ranged1_damageType = '',
+        strikes_ranged1_weaponSpecialization = '',
+        strikes_ranged1_other = '',
+        strikes_ranged1_traits = '',
+
+        strikes_ranged2_name = '',
+        strikes_ranged2_modifier = '0',
+        strikes_ranged2_hitModifier = '',
+        strikes_ranged2_proficiency = '',
+        strikes_ranged2_proficiency_bonus = '0',
+        strikes_ranged2_itemBonus = '',
+        strikes_ranged2_damageDice = '',
+        strikes_ranged2_damageModifier = '',
+        strikes_ranged2_damageType = '',
+        strikes_ranged2_weaponSpecialization = '',
+        strikes_ranged2_other = '',
+        strikes_ranged2_traits = '',
+
+        strikes_ranged3_name = '',
+        strikes_ranged3_modifier = '0',
+        strikes_ranged3_hitModifier = '',
+        strikes_ranged3_proficiency = '',
+        strikes_ranged3_proficiency_bonus = '0',
+        strikes_ranged3_itemBonus = '',
+        strikes_ranged3_damageDice = '',
+        strikes_ranged3_damageModifier = '',
+        strikes_ranged3_damageType = '',
+        strikes_ranged3_weaponSpecialization = '',
+        strikes_ranged3_other = '',
+        strikes_ranged3_traits = '',
+
+        weaponProficiencies_simple = '',
+        weaponProficiencies_martial = '',
+        weaponProficiencies_other1_name = '',
+        weaponProficiencies_other1 = '',
+        weaponProficiencies_other2_name = '',
+        weaponProficiencies_other2 = '',
+
+        skills_acrobatics_modifier = '0',
+        skills_acrobatics_dexterity = '0',
+        skills_acrobatics_proficiency = '',
+        skills_acrobatics_proficiency_bonus = '0',
+        skills_acrobatics_itemBonus = '',
+        skills_acrobatics_armorPenalty = '',
+
+        skills_arcana_modifier = '0',
+        skills_arcana_intelligence = '0',
+        skills_arcana_proficiency = '',
+        skills_arcana_proficiency_bonus = '0',
+        skills_arcana_itemBonus = '',
+
+        skills_athletics_modifier = '0',
+        skills_athletics_strength = '0',
+        skills_athletics_proficiency = '',
+        skills_athletics_proficiency_bonus = '0',
+        skills_athletics_itemBonus = '',
+        skills_athletics_armorPenalty = '',
+
+        skills_crafting_modifier = '0',
+        skills_crafting_intelligence = '0',
+        skills_crafting_proficiency = '',
+        skills_crafting_proficiency_bonus = '0',
+        skills_crafting_itemBonus = '',
+
+        skills_deception_modifier = '0',
+        skills_deception_charisma = '0',
+        skills_deception_proficiency = '',
+        skills_deception_proficiency_bonus = '0',
+        skills_deception_itemBonus = '',
+
+        skills_diplomacy_modifier = '0',
+        skills_diplomacy_charisma = '0',
+        skills_diplomacy_proficiency = '',
+        skills_diplomacy_proficiency_bonus = '0',
+        skills_diplomacy_itemBonus = '',
+
+        skills_intimidation_modifier = '0',
+        skills_intimidation_charisma = '0',
+        skills_intimidation_proficiency = '',
+        skills_intimidation_proficiency_bonus = '0',
+        skills_intimidation_itemBonus = '',
+
+        skills_lore1_type = "",
+        skills_lore1_modifier = '0',
+        skills_lore1_intelligence = '0',
+        skills_lore1_proficiency = '',
+        skills_lore1_proficiency_bonus = '0',
+        skills_lore1_itemBonus = '',
+
+        skills_lore2_type = "",
+        skills_lore2_modifier = '0',
+        skills_lore2_intelligence = '0',
+        skills_lore2_proficiency = '',
+        skills_lore2_proficiency_bonus = '0',
+        skills_lore2_itemBonus = '',
+
+        skills_medicine_modifier = '0',
+        skills_medicine_wisdom = '0',
+        skills_medicine_proficiency = '',
+        skills_medicine_proficiency_bonus = '0',
+        skills_medicine_itemBonus = '',
+
+        skills_nature_modifier = '0',
+        skills_nature_wisdom = '0',
+        skills_nature_proficiency = '',
+        skills_nature_proficiency_bonus = '0',
+        skills_nature_itemBonus = '',
+
+        skills_occultism_modifier = '0',
+        skills_occultism_intelligence = '0',
+        skills_occultism_proficiency = '',
+        skills_occultism_proficiency_bonus = '0',
+        skills_occultism_itemBonus = '',
+
+        skills_performance_modifier = '0',
+        skills_performance_charisma = '0',
+        skills_performance_proficiency = '',
+        skills_performance_proficiency_bonus = '0',
+        skills_performance_itemBonus = '',
+
+        skills_religion_modifier = '0',
+        skills_religion_wisdom = '0',
+        skills_religion_proficiency = '',
+        skills_religion_proficiency_bonus = '0',
+        skills_religion_itemBonus = '',
+
+        skills_society_modifier = '0',
+        skills_society_intelligence = '0',
+        skills_society_proficiency = '',
+        skills_society_proficiency_bonus = '0',
+        skills_society_itemBonus = '',
+
+        skills_stealth_modifier = '0',
+        skills_stealth_dexterity = '0',
+        skills_stealth_proficiency = '',
+        skills_stealth_proficiency_bonus = '0',
+        skills_stealth_itemBonus = '',
+        skills_stealth_armorPenalty = '',
+
+        skills_survival_modifier = '0',
+        skills_survival_wisdom = '0',
+        skills_survival_proficiency = '',
+        skills_survival_proficiency_bonus = '0',
+        skills_survival_itembonus = '',
+
+        skills_thievery_modifier = '0',
+        skills_thievery_dexterity = '0',
+        skills_thievery_proficiency = '',
+        skills_thievery_proficiency_bonus = '0',
+        skills_thievery_itemBonus = '',
+        skills_thievery_armorPenalty = '',
+
+        languages = ''
+    }
+end
+
+function updateVisualState()
+    for k in pairs(state) do
+        if self.UI.getAttribute(k, 'class') == 'textInput' or self.UI.getAttribute(k, 'class') == 'intInput'
+                or self.UI.getAttribute(k, 'class') == 'autoButton' then
+            self.UI.setAttribute(k, 'text', state[k])
+        elseif self.UI.getAttribute(k, 'class') == 'toggleGroup' then
+            if state[k] ~= '' then
+                self.UI.setAttribute(k .. '_' .. state[k], 'isOn', 'true')
+            else
+                self.UI.setAttribute(k .. '_0', 'isOn', 'false')
+            end
+        elseif self.UI.getAttribute(k, 'class') == 'autoText' then
+            self.UI.setValue(k, state[k])
+        end
+    end
+end
+
+function onSave()
+    -- setToDefaults()
+    local data = { state = state }
+    saved_data = JSON.encode(data)
+    if disableSave then
+        saved_data = ''
+    end
+    return saved_data
+end
+
+function onLoad(saved_data)
+    if saved_data ~= '' and not debugging then
+        local loaded_data = JSON.decode(saved_data)
+        state = loaded_data.state
+    else
+        setToDefaults()
+    end
+    printMode = "ALL"
+    updateVisualState()
+
+    --Set a new seed based on the smallest part of OS time
+    math.randomseed( tonumber(tostring(os.time()):reverse():sub(1,6)) )
+end

@@ -917,119 +917,99 @@ defaultButtonData = {
         alignment = Number to indicate how you want text aligned
                     (1=Automatic, 2=Left, 3=Center, 4=Right, 5=Justified)
         ]]
---Character name
+        --Character name
         {
-            pos       = {0.0,0.1,-1.859},
-            rows      = 1,
-            width     = 4700,
+            pos = { 0.0, 0.1, -1.859 },
+            rows = 1,
+            width = 4700,
             font_size = 600,
-            label     = "Character Name",
-            value     = "",
+            label = "Character Name",
+            value = "",
             alignment = 3
         },
---Player Name
+        --Player Name
         {
-            pos       = {0,0.1,-1.74},
-            rows      = 1,
-            width     = 4700,
+            pos = { 0, 0.1, -1.74 },
+            rows = 1,
+            width = 4700,
             font_size = 300,
-            label     = "Player Name",
-            value     = "",
+            label = "Player Name",
+            value = "",
             alignment = 3
         },
---Background
+        --Background
         {
-            pos       = {0,0.1,-1.59},
-            rows      = 1,
-            width     = 4700,
+            pos = { 0, 0.1, -1.59 },
+            rows = 1,
+            width = 4700,
             font_size = 375,
-            label     = "Background",
-            value     = "",
+            label = "Background",
+            value = "",
             alignment = 3
         },
-    --Background Notes
+        --Background Notes
         {
-            pos       = {0,0.1,-1.46},
-            rows      = 2,
-            width     = 4700,
+            pos = { 0, 0.1, -1.46 },
+            rows = 2,
+            width = 4700,
             font_size = 300,
-            label     = "Background Notes",
-            value     = "",
+            label = "Background Notes",
+            value = "",
             alignment = 3
         },
---Skill Notes
+        --Class
         {
-            pos       = {-0.21,0.1,0.75},
-            rows      = 24,
-            width     = 1800,
-            font_size = 500,
-            label     = "Skill Notes",
-            value     = "",
-            alignment = 2
-        },
-    --Max HP
-        {
-            pos       = {0.627,0.1,-0.97},
-            rows      = 1,
-            width     = 500,
-            font_size = 400,
-            label     = "0",
-            value     = "",
-            alignment = 3
-        },
---Class
-        {
-            pos       = {1.01,0.1,-1.59},
-            rows      = 1,
-            width     = 4700,
+            pos = { 1.01, 0.1, -1.59 },
+            rows = 1,
+            width = 4700,
             font_size = 375,
-            label     = "Class",
-            value     = "",
+            label = "Class",
+            value = "",
             alignment = 3
         },
-    --Class Notes
+        --Class Notes
         {
-            pos       = {1.01,0.1,-1.46},
-            rows      = 2,
-            width     = 4700,
+            pos = { 1.01, 0.1, -1.46 },
+            rows = 2,
+            width = 4700,
             font_size = 300,
-            label     = "Class Notes",
-            value     = "",
+            label = "Class Notes",
+            value = "",
             alignment = 3
         },
---Ancestry
+        --Ancestry
         {
-            pos       = {-1.01,0.1,-1.59},
-            rows      = 1,
-            width     = 4700,
+            pos = { -1.01, 0.1, -1.59 },
+            rows = 1,
+            width = 4700,
             font_size = 375,
-            label     = "Ancestry",
-            value     = "",
+            label = "Ancestry",
+            value = "",
             alignment = 3
         },
         --Ancestry notes
         {
-            pos       = {-1.11,0.1,-1.46},
-            rows      = 2,
-            width     = 3800,
+            pos = { -1.11, 0.1, -1.46 },
+            rows = 2,
+            width = 3800,
             font_size = 300,
-            label     = "Heritage and traits",
-            value     = "",
+            label = "Heritage and traits",
+            value = "",
             alignment = 3
         },
-    --Size
+        --Size
         {
-            pos       = {-0.613,0.1,-1.461},
-            rows      = 1,
-            width     = 750,
+            pos = { -0.613, 0.1, -1.461 },
+            rows = 1,
+            width = 750,
             font_size = 600,
-            label     = "Size",
-            value     = "",
+            label = "Size",
+            value = "",
             alignment = 3
         },
---Level
+        --Level
         {
-            pos = {0.62,0.1,-1.818},
+            pos = { 0.62, 0.1, -1.818 },
             rows = 1,
             width = 450,
             font_size = 450,
@@ -1038,7 +1018,7 @@ defaultButtonData = {
             alignment = 3
         },
         {
-            pos = {0.86,0.1,-1.817},
+            pos = { 0.86, 0.1, -1.817 },
             rows = 1,
             width = 1250,
             font_size = 450,
@@ -1046,61 +1026,403 @@ defaultButtonData = {
             value = "",
             alignment = 3
         },
---Ability Scores
+        --Ability Scores
         {
-            pos = {1.101,0.1,-1.251},
+            pos = { 1.101, 0.1, -1.251 },
             rows = 1,
             width = 450,
             font_size = 450,
             label = "0",
             value = "",
             alignment = 3
-        },--Charisma
+        }, --Charisma
         {
-            pos = {0.586,0.1,-1.251},
+            pos = { 0.586, 0.1, -1.251 },
             rows = 1,
             width = 450,
             font_size = 450,
             label = "0",
             value = "",
             alignment = 3
-        },--Wisdom
+        }, --Wisdom
         {
-            pos = {0.083,0.1,-1.251},
+            pos = { 0.083, 0.1, -1.251 },
             rows = 1,
             width = 450,
             font_size = 450,
             label = "0",
             value = "",
             alignment = 3
-        },--Intelligence
+        }, --Intelligence
         {
-            pos = {-0.433,0.1,-1.251},
+            pos = { -0.433, 0.1, -1.251 },
             rows = 1,
             width = 450,
             font_size = 450,
             label = "0",
             value = "",
             alignment = 3
-        },--Constitution
+        }, --Constitution
         {
-            pos = {-0.938,0.1,-1.251},
+            pos = { -0.938, 0.1, -1.251 },
             rows = 1,
             width = 450,
             font_size = 450,
             label = "0",
             value = "",
             alignment = 3
-        },--Dexterity
+        }, --Dexterity
         {
-            pos = {-1.446,0.1,-1.251},
+            pos = { -1.446, 0.1, -1.251 },
             rows = 1,
             width = 450,
             font_size = 450,
             label = "0",
             value = "",
             alignment = 3
-        },--Strength
+        }, --Strength
+        --Armor Class
+        {
+            pos = { -1.309, 0.1, -0.954 },
+            rows = 1,
+            width = 500,
+            font_size = 500,
+            label = "10",
+            value = "",
+            alignment = 3
+        }, --Armor
+        --Shield
+        {
+            pos = { -1.054, 0.1, -0.99 },
+            rows = 1,
+            width = 450,
+            font_size = 450,
+            label = "0",
+            value = "",
+            alignment = 3
+        }, --Shield AC
+        {
+            pos = { -0.912, 0.1, -0.979 },
+            rows = 1,
+            width = 450,
+            font_size = 250,
+            label = "0",
+            value = "",
+            alignment = 3
+        }, --Shield hardness
+        {
+            pos = { -0.784, 0.1, -0.978 },
+            rows = 1,
+            width = 300,
+            font_size = 175,
+            label = "0",
+            value = "",
+            alignment = 3
+        }, --Shield Max HP
+        {
+            pos = { -0.684, 0.1, -0.978 },
+            rows = 1,
+            width = 300,
+            font_size = 200,
+            label = "0",
+            value = "",
+            alignment = 3
+        }, --Shield BT
+        {
+            pos = { -0.577, 0.1, -0.977 },
+            rows = 1,
+            width = 350,
+            font_size = 300,
+            label = "0",
+            value = "",
+            alignment = 3
+        }, --Shield HP
+        --Saving throws
+        {
+            pos = { -0.362, 0.1, -0.982 },
+            rows = 1,
+            width = 600,
+            font_size = 450,
+            label = "0",
+            value = "",
+            alignment = 3
+        }, --Fort
+        {
+            pos = { -0.022, 0.1, -0.983 },
+            rows = 1,
+            width = 600,
+            font_size = 450,
+            label = "0",
+            value = "",
+            alignment = 3
+        }, --Reflex
+        {
+            pos = { 0.312, 0.1, -0.983 },
+            rows = 1,
+            width = 600,
+            font_size = 450,
+            label = "0",
+            value = "",
+            alignment = 3
+        }, --Will
+        --Defenses Notes
+        {
+            pos = { 0, 0.1, -0.7 },
+            rows = 2,
+            width = 4700,
+            font_size = 300,
+            label = "Defenses Notes",
+            value = "",
+            alignment = 2
+        },
+        --Max HP
+        {
+            pos = { 0.627, 0.1, -0.97 },
+            rows = 1,
+            width = 500,
+            font_size = 400,
+            label = "0",
+            value = "",
+            alignment = 3
+        },
+        --Resistances and Immunities
+        {
+            pos = { 1.01, 0.1, -0.8 },
+            rows = 1,
+            width = 4720,
+            font_size = 400,
+            label = "Resistances and Immunities",
+            value = "",
+            alignment = 2
+        },
+        --Conditions
+        {
+            pos = { 1.01, 0.1, -0.68 },
+            rows = 1,
+            width = 4720,
+            font_size = 400,
+            label = "Conditions",
+            value = "",
+            alignment = 2
+        },
+        --Skill Notes
+        {
+            pos = { -0.21, 0.1, 0.75 },
+            rows = 24,
+            width = 1800,
+            font_size = 500,
+            label = "Skill Notes",
+            value = "",
+            alignment = 2
+        },
+        --Languages
+        {
+            pos = { 0.247, 0.1, -0.348 },
+            rows = 10,
+            width = 2200,
+            font_size = 180,
+            alignment = 2
+        },
+        --Perception
+        {
+            pos = { 0.581, 0.1, -0.494 },
+            rows = 1,
+            width = 480,
+            font_size = 375,
+            alignment = 3
+        },
+        --Speed
+        {
+            pos = { 1.158, 0.1, -0.479 },
+            rows = 1,
+            width = 700,
+            font_size = 200,
+            alignment = 3
+
+        },
+        -- Senses and notes
+        {
+            pos = { 0.754, 0.1, -0.262 },
+            rows = 3,
+            width = 2200,
+            font_size = 200,
+            alignment = 2
+        },
+        --Special movement
+        {
+            pos = { 1.267, 0.1, -0.265 },
+            rows = 3,
+            width = 2200,
+            font_size = 200,
+            alignment = 2
+        },
+        --Skills
+        {
+            pos = { -1.054, 0.1, -0.509 },
+            rows = 1,
+            width = 500,
+            font_size = 400,
+            label = "0",
+            value = "",
+            alignment = 3
+        }, --Acrobatics
+        {
+            pos = { -1.054, 0.1, -0.367 },
+            rows = 1,
+            width = 500,
+            font_size = 400,
+            label = "0",
+            value = "",
+            alignment = 3
+        }, --Arcana
+        {
+        pos = {-1.054,0.1,-0.217},
+        rows = 1,
+        width = 500,
+        font_size = 400,
+        label = "0",
+        value = "",
+        alignment = 3
+        },--Athletics
+        {
+            pos = {-1.054,0.1,-0.079},
+            rows = 1,
+            width = 500,
+            font_size = 400,
+            label = "0",
+            value = "",
+            alignment = 3
+        },--Crafting
+        {
+            pos = {-1.054,0.1,0.064},
+            rows = 1,
+            width = 500,
+            font_size = 400,
+            label = "0",
+            value = "",
+            alignment = 3
+        },--Deception
+        {
+            pos = {-1.054,0.1,0.209},
+            rows = 1,
+            width = 500,
+            font_size = 400,
+            label = "0",
+            value = "",
+            alignment = 3
+        },--Diplomacy
+        {
+            pos = {-1.054,0.1,0.352},
+            rows = 1,
+            width = 500,
+            font_size = 400,
+            label = "0",
+            value = "",
+            alignment = 3
+        },--Intimidation
+        {
+            pos = {-1.054,0.1,0.495},
+            rows = 1,
+            width = 500,
+            font_size = 400,
+            label = "0",
+            value = "",
+            alignment = 3
+        },--Lore
+        {
+            pos = {-1.054,0.1,0.636},
+            rows = 1,
+            width = 500,
+            font_size = 400,
+            label = "0",
+            value = "",
+            alignment = 3
+        },--Lore2
+        {
+            pos = {-1.054,0.1,0.782},
+            rows = 1,
+            width = 500,
+            font_size = 400,
+            label = "0",
+            value = "",
+            alignment = 3
+        },--Medicine
+        {
+            pos = {-1.054,0.1,0.922},
+            rows = 1,
+            width = 500,
+            font_size = 400,
+            label = "0",
+            value = "",
+            alignment = 3
+        },--Nature
+        {
+            pos = {-1.054,0.1,1.068},
+            rows = 1,
+            width = 500,
+            font_size = 400,
+            label = "0",
+            value = "",
+            alignment = 3
+        },--Occultism
+        {
+            pos = {-1.054,0.1,1.211},
+            rows = 1,
+            width = 500,
+            font_size = 400,
+            label = "0",
+            value = "",
+            alignment = 3
+        },--Performance
+        {
+            pos = {-1.054,0.1,1.356},
+            rows = 1,
+            width = 500,
+            font_size = 400,
+            label = "0",
+            value = "",
+            alignment = 3
+        },--Religion
+        {
+            pos = {-1.054,0.1,1.498},
+            rows = 1,
+            width = 500,
+            font_size = 400,
+            label = "0",
+            value = "",
+            alignment = 3
+        },--Society
+        {
+            pos = {-1.054,0.1,1.642},
+            rows = 1,
+            width = 500,
+            font_size = 400,
+            label = "0",
+            value = "",
+            alignment = 3
+        },--Stealth
+        {
+            pos = {-1.054,0.1,1.786},
+            rows = 1,
+            width = 500,
+            font_size = 400,
+            label = "0",
+            value = "",
+            alignment = 3
+        },--Survival
+        {
+            pos = {-1.054,0.1,1.928},
+            rows = 1,
+            width = 500,
+            font_size = 400,
+            label = "0",
+            value = "",
+            alignment = 3
+        },--Thievery
+
+
+
+
 
 
         --End of textboxes
