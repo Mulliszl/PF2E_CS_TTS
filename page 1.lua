@@ -51,7 +51,7 @@ Bonus) Finding/Editing Positions for elements
 Begin editing below:    ]]
 
 --Set this to true while editing and false when you have finished
-disableSave = true
+disableSave = false
 --Remember to set this to false once you are done making changes
 --Then, after you save & apply it, save your game too
 
@@ -1419,10 +1419,195 @@ defaultButtonData = {
             value = "",
             alignment = 3
         },--Thievery
+--Strikes ( Melee)
+        --Weapon 1
+        {
+            pos = {0.259,0.1,0.1},
+            rows = 1,
+            width = 2200,
+            font_size = 300,
+            alignment = 2
+        },--Weapon
+        {
+            pos = {0.6,0.1,0.1},
+            rows = 1,
+            width = 500,
+            font_size = 300,
+            alignment = 3
+        },-- Attack bonus
+        {
+            pos = {1.24,0.1,0.1},
+            rows = 1,
+            width = 1800,
+            font_size = 300,
+            alignment = 3
+        }, -- Damage
+        {
+            pos = {0.76,0.1,0.215},
+            rows = 1,
+            width = 7100,
+            font_size = 300,
+            label = "Traits and notes",
+            value = "",
+            alignment = 2
+        }, -- Traits and notes
+        --Weapon 2
+        {
+            pos = {0.258,0.1,0.376},
+            rows = 1,
+            width = 2200,
+            font_size = 300,
+            alignment = 2
+        },--Weapon
+        {
+            pos = {0.6,0.1,0.367},
+            rows = 1,
+            width = 500,
+            font_size = 300,
+            alignment = 3
 
+        },-- Attack bonus
+        {
+            pos = {1.23,0.1,0.38},
+            rows = 1,
+            width = 1800,
+            font_size = 300,
+            alignment = 3
+        }, -- Damage
+        {
+            pos = {0.76,0.1,0.478},
+            rows = 1,
+            width = 7100,
+            font_size = 300,
+            label = "Traits and notes",
+            value = "",
+            alignment = 2
+        }, -- Traits and notes
+        --Weapon 3
+        {
+            pos = {0.25,0.1,0.639},
+            rows = 1,
+            width = 2200,
+            font_size = 300,
+            alignment = 2
+        },--Weapon
+        {
+            pos = {0.6,0.1,0.625},
+            rows = 1,
+            width = 500,
+            font_size = 300,
+            alignment = 3
 
+        },-- Attack bonus
+        {
+            pos = {1.239,0.1,0.639},
+            rows = 1,
+            width = 1800,
+            font_size = 300,
+            alignment = 3
+        }, -- Damage
+        {
+            pos = {0.76,0.1,0.745},
+            rows = 1,
+            width = 7100,
+            font_size = 300,
+            label = "Traits and notes",
+            value = "",
+            alignment = 2
+        }, -- Traits and notes
+--Strikes (Ranged)
+        --Weapon 1
+        {
+            pos = {0.26,0.1,0.981},
+            rows = 1,
+            width = 2200,
+            font_size = 300,
+            alignment = 2
+        },--Weapon
+        {
+            pos = {0.6,0.1,0.975},
+            rows = 1,
+            width = 400,
+            font_size = 300,
+            alignment = 3
 
-
+        },-- Attack bonus
+        {
+            pos = {1.244,0.1,0.986},
+            rows = 1,
+            width = 1800,
+            font_size = 300,
+            alignment = 3
+        }, -- Damage
+        {
+            pos = {0.76,0.1,1.086},
+            rows = 1,
+            width = 7100,
+            font_size = 300,
+            label = "Traits and notes",
+            value = "",
+            alignment = 2
+        }, -- Traits and notes
+        --Weapon 2
+        {
+            pos = {0.26,0.1,1.246},
+            rows = 1,
+            width = 2200,
+            font_size = 300,
+            alignment = 2
+        },--Weapon
+        {
+            pos = {0.6,0.1,1.243},
+            rows = 1,
+            width = 400,
+            font_size = 300,
+            alignment = 3
+        },-- Attack bonus
+        {
+            pos = {1.246,0.1,1.254},
+            rows = 1,
+            width = 1800,
+            font_size = 300,
+            alignment = 3
+        }, -- Damage
+        {
+            pos = {0.76,0.1,1.35},
+            rows = 1,
+            width = 7100,
+            font_size = 300,
+            label = "",
+            value = "",
+            alignment = 2
+        }, -- Traits and notes
+--Weapon notes
+        {
+            pos = {0.797,0.1,1.547},
+            rows = 3,
+            width = 1750,
+            font_size = 275,
+            label = "Additional Notes",
+            value = "",
+            alignment = 2
+        }, -- Traits and notes
+        {
+            pos = {1.255,0.1,1.544},
+            rows = 3,
+            width = 2000,
+            font_size = 280,
+            label = "Critical Specializatiosns",
+            value = "",
+            alignment = 2
+        }, -- Critical Specializations
+--Class DC
+        {
+            pos = {0.26,0.1,1.779},
+            rows = 1,
+            width = 1500,
+            font_size = 400,
+            label = "Class DC",
+            value = "",
+            alignment = 2
+        },
 
 
         --End of textboxes
